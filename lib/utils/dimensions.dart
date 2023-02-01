@@ -5,6 +5,7 @@ class Dimensions {
   static double screenWidth = Get.context!.width;
   static double pageView = screenHeight / 2.64;
 
+  static double height1 = screenHeight / 844;
   static double height5 = screenHeight / 168.8;
   static double height10 = screenHeight / 84.4;
   static double height15 = screenHeight / 56.27;
@@ -18,8 +19,8 @@ class Dimensions {
   static double widhth30 = screenWidth / 13;
   static double widhth45 = screenWidth / 8.6;
   //iPhone height 844 / 320 container height = 2.64;
-  static double pageViewContainer = screenHeight / 3.84;
-  static double pageViewTextContainer = screenHeight / 5.62;
+  static double pageViewContainer = screenHeight / 3.309;
+  static double pageViewTextContainer = screenHeight / 5.265; //
 
   //font size
   static double font20 = screenHeight / 42.2;

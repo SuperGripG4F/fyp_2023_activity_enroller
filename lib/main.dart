@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_2023_activity_enroller/pages/activity/activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
 import 'package:get/route_manager.dart';
 
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MainActivityPage(),
+      //home: const MainActivityPage(),
+      home: ActivityDetail(
+        pageId: 0,
+      ),
     );
   }
 }

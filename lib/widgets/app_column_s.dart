@@ -9,7 +9,7 @@ import '../utils/dimensions.dart';
 import 'big_text.dart';
 import 'icon_and_text_widget.dart';
 
-class AppColumn extends StatelessWidget {
+class AppColumnSmall extends StatelessWidget {
   final String text;
   final int stars;
   final int comments_num;
@@ -18,7 +18,7 @@ class AppColumn extends StatelessWidget {
   final String time;
   final String location;
 
-  const AppColumn(
+  const AppColumnSmall(
       {super.key,
       required this.text,
       required this.stars,
@@ -33,9 +33,12 @@ class AppColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(
+          height: Dimensions.height10,
+        ),
         BigText(
           text: text,
-          size: Dimensions.font26,
+          size: Dimensions.font20,
         ),
         SizedBox(
           height: Dimensions.height10,
@@ -76,19 +79,6 @@ class AppColumn extends StatelessWidget {
             IconAndTextWidget(
                 icon: Icons.schedule,
                 text: time,
-                iconColor: AppColors.mainColor5),
-          ],
-        ),
-        SizedBox(
-          height: Dimensions.height10,
-        ),
-        Row(
-          // ignore: prefer_const_literals_to_create_immutables
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            IconAndTextWidget(
-                icon: Icons.location_on,
-                text: location,
                 iconColor: AppColors.mainColor5),
           ],
         ),

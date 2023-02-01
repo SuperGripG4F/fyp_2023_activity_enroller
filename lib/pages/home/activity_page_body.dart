@@ -1,6 +1,7 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:fyp_2023_activity_enroller/widgets/app_column_s.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -63,7 +64,115 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                   position,
                 );
               }),
-        )
+        ),
+        //dots
+        DotsIndicator(
+          //solve the problems that, the dots length is 0 , when in first init.
+          dotsCount: 5,
+          position: _currPageValue,
+          decorator: DotsDecorator(
+            activeColor: AppColors.mainColor1,
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
+        ),
+        //Recommended section
+        SizedBox(
+          height: Dimensions.height30,
+        ),
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.widhth30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(text: "Recommended"),
+              SizedBox(
+                width: Dimensions.widhth10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 3),
+                child: BigText(
+                  text: ".",
+                  color: Colors.black26,
+                ),
+              ),
+              SizedBox(
+                width: Dimensions.widhth10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 2),
+                child: SmallText(text: "Acitvities"),
+              ),
+            ],
+          ),
+        ),
+        //list of food and images section
+        ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            // itemCount: recommendedProducts.recommendedProductList.length,
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  //Get.toNamed(RouteHelper.getRecommendedFood());
+                },
+                child: Container(
+                  margin: EdgeInsets.only(
+                      left: Dimensions.widhth20,
+                      right: Dimensions.widhth20,
+                      bottom: Dimensions.height10),
+                  child: Row(
+                    children: [
+                      Container(
+                          width: Dimensions.listViewImgSize,
+                          height: Dimensions.listViewImgSize,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                Dimensions.radius20,
+                              ),
+                              color: Colors.white38,
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  // image: NetworkImage(recommendedProducts
+                                  //     .recommendedProductList[index].img!
+                                  image: AssetImage("assets/image/act1.png")))),
+                      //focus the widget to get all available space
+                      Expanded(
+                        child: Container(
+                          height: Dimensions.listViewTextContSize,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(Dimensions.radius20),
+                                bottomRight:
+                                    Radius.circular(Dimensions.radius20)),
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: Dimensions.height1,
+                              left: Dimensions.widhth10,
+                              right: Dimensions.widhth10,
+                              bottom: Dimensions.height1,
+                            ),
+                            child: AppColumnSmall(
+                                text: '招募音樂人/Band 隊!!!',
+                                stars: 5,
+                                comments_num: 1200,
+                                date: "5-2-2023",
+                                day: "Mon",
+                                time: "14:00",
+                                location: "循道衛理中心愛秩序灣"),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
       ],
     );
   }
@@ -147,9 +256,16 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                 padding: EdgeInsets.only(
                     top: Dimensions.height20,
                     left: Dimensions.widhth10,
-                    right: Dimensions.widhth10),
+                    right: Dimensions.widhth10,
+                    bottom: Dimensions.height10),
                 child: AppColumn(
                   text: '招募音樂人/Band 隊!!!',
+                  stars: 5,
+                  comments_num: 1200,
+                  date: "5-2-2023",
+                  day: "Mon",
+                  time: "14:00",
+                  location: "循道衛理中心愛秩序灣",
                 ),
               ),
             ),

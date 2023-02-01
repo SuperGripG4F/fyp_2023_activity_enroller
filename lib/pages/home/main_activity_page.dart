@@ -40,8 +40,6 @@ class MainActivityPage extends StatelessWidget {
                           //Icon(Icons.arrow_drop_down_rounded)
                         ],
                       )
-
-                      //Text("City"),
                     ],
                   ),
                   Center(
