@@ -47,9 +47,11 @@ class ActivityModel {
   String? titleEn;
   String? titleZh;
   String? slogan;
+  String? poster;
   int? activityLength;
   List<Dates>? dates;
   String? location;
+  String? desc;
   String? validDate;
   int? stars;
   int? comments;
@@ -63,9 +65,11 @@ class ActivityModel {
       this.titleEn,
       this.titleZh,
       this.slogan,
+      this.poster,
       this.activityLength,
       this.dates,
       this.location,
+      this.desc,
       this.validDate,
       this.stars,
       this.comments,
@@ -79,6 +83,7 @@ class ActivityModel {
     titleEn = json['title-en'];
     titleZh = json['title-zh'];
     slogan = json['slogan'];
+    poster = json['poster'];
     activityLength = json['activity-length'];
     if (json['dates'] != null) {
       dates = <Dates>[];
@@ -87,6 +92,7 @@ class ActivityModel {
       });
     }
     location = json['location'];
+    desc = json['desc'];
     validDate = json['valid_date'];
     stars = json['stars'];
     comments = json['comments'];
@@ -101,12 +107,14 @@ class ActivityModel {
     data['organization'] = this.organization;
     data['title-en'] = this.titleEn;
     data['title-zh'] = this.titleZh;
+    data['poster'] = this.poster;
     data['slogan'] = this.slogan;
     data['activity-length'] = this.activityLength;
     if (this.dates != null) {
       data['dates'] = this.dates!.map((v) => v.toJson()).toList();
     }
     data['location'] = this.location;
+    data['desc'] = this.desc;
     data['valid_date'] = this.validDate;
     data['stars'] = this.stars;
     data['comments'] = this.comments;

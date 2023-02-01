@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:get/get.dart';
 
+import '../../routes/route_helper.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/app_column.dart';
@@ -30,7 +31,7 @@ class RecommendedActivityDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-                      //Get.toNamed(RouteHelper.getInitial());
+                      Get.toNamed(RouteHelper.getInitial());
                     },
                     child: AppIcon(icon: Icons.clear)),
                 //AppIcon(icon: Icons.shopping_bag_outlined)
@@ -44,11 +45,11 @@ class RecommendedActivityDetail extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(Dimensions.radius20),
                           topRight: Radius.circular(Dimensions.radius20))),
-                  child: Center(
-                      child: BigText(
-                    size: Dimensions.font26,
-                    text: "招募音樂人/Band 隊!!!",
-                  )),
+                  // child: Center(
+                  //     child: BigText(
+                  //   size: Dimensions.font26,
+                  //   text: "招募音樂人/Band 隊!!!",
+                  // )),
                   width: double.maxFinite,
                   padding: EdgeInsets.only(top: 5, bottom: 10),
                 )),
@@ -77,8 +78,7 @@ class RecommendedActivityDetail extends StatelessWidget {
                 margin: EdgeInsets.only(
                     right: Dimensions.widhth20, left: Dimensions.widhth20),
                 child: AppColumnDetail(
-                  //ext: product.name,
-                  text: '招募音樂人/Band 隊!!!',
+                  text: '攝影比賽',
                   stars: 5,
                   comments_num: 1200,
                   date: "5-2-2023",

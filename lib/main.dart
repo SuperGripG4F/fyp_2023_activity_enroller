@@ -4,6 +4,7 @@ import 'package:fyp_2023_activity_enroller/data/controllers/recommended_activity
 import 'package:fyp_2023_activity_enroller/pages/activity/activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/recommended_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
+import 'package:fyp_2023_activity_enroller/routes/route_helper.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'helper/dependencies.dart' as dep;
@@ -30,10 +31,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //home: const MainActivityPage(),
-      home: RecommendedActivityDetail(
-          //pageId: 0,
-          ),
+      home: const MainActivityPage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }

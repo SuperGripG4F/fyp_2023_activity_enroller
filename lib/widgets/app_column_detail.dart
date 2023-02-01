@@ -34,6 +34,22 @@ class AppColumnDetail extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          children: [
+            Container(
+                width: Dimensions.screenWidth - Dimensions.widhth45,
+                child: Text(
+                  text,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      color: const Color(0xFF332d2b),
+                      fontSize: Dimensions.font20,
+                      fontWeight: FontWeight.w400),
+                ))
+          ],
+        ),
         SizedBox(
           height: Dimensions.height10,
         ),
