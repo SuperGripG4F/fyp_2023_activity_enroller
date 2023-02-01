@@ -19,7 +19,7 @@ class Dimensions {
   static double widhth45 = screenWidth / 8.6;
   //iPhone height 844 / 320 container height = 2.64;
   static double pageViewContainer = screenHeight / 3.84;
-  static double pageViewTextContainer = screenHeight / 7.03;
+  static double pageViewTextContainer = screenHeight / 5.62;
 
   //font size
   static double font20 = screenHeight / 42.2;

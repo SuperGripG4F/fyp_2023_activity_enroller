@@ -33,7 +33,7 @@ class AppColumn extends StatelessWidget {
                   5,
                   (index) => Icon(
                         Icons.star,
-                        color: AppColors.mainColor,
+                        color: AppColors.mainColor1,
                         size: 15,
                       )),
             ),
@@ -51,22 +51,37 @@ class AppColumn extends StatelessWidget {
           height: Dimensions.height10,
         ),
         Row(
-          // ignore: prefer_const_literals_to_create_immutables
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconAndTextWidget(
-                icon: Icons.circle_sharp,
-                text: "Normal",
-                iconColor: AppColors.iconColor1),
+                icon: Icons.calendar_month,
+                text: "5-2-2023",
+                iconColor: AppColors.mainColor3),
+            IconAndTextWidget(
+                icon: Icons.event,
+                text: "Mon",
+                iconColor: AppColors.mainColor4),
+            IconAndTextWidget(
+                icon: Icons.schedule,
+                text: "14:00",
+                iconColor: AppColors.mainColor5),
+          ],
+        ),
+        SizedBox(
+          height: Dimensions.height5,
+        ),
+        Row(
+          // ignore: prefer_const_literals_to_create_immutables
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
             IconAndTextWidget(
                 icon: Icons.location_on,
-                text: "1.7km",
-                iconColor: AppColors.mainColor),
-            IconAndTextWidget(
-                icon: Icons.access_time_rounded,
-                text: "32min",
-                iconColor: AppColors.iconColor1),
+                text: "循道衛理中心愛秩序灣",
+                iconColor: AppColors.mainColor5),
           ],
+        ),
+        SizedBox(
+          height: Dimensions.height5,
         ),
       ],
     );
