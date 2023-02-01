@@ -1,12 +1,16 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
+import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
+import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
 import 'package:fyp_2023_activity_enroller/widgets/app_column_s.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
+import '../../routes/route_helper.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/app_column.dart';
@@ -51,20 +55,24 @@ class _ActivityPageBody extends State<ActivityPageBody> {
         //slider section
         //if any data updated , we will know in this builder.
         //popularProducts is the instance of controller
-        Container(
-          height: Dimensions.pageView,
-          child: PageView.builder(
-              controller: pageController,
-              //itemCount: popularProducts.popularProductList.length,
-              itemCount: 5,
-              //position is 0 - 5 total 5 items
-              itemBuilder: (context, position) {
-                return _buildPageItem(
-                  //position, popularProducts.popularProductList[position]);
-                  position,
+        GetBuilder<PopularActivityController>(builder: (popularActivity) {
+          return popularActivity.isLoaded
+              ? Container(
+                  height: Dimensions.pageView,
+                  child: PageView.builder(
+                      controller: pageController,
+                      itemCount: popularActivity.popularActivityList.length,
+                      itemBuilder: (context, position) {
+                        return _buildPageItem(
+                            //position, popularProducts.popularProductList[position]);
+                            position,
+                            popularActivity.popularActivityList[position]);
+                      }),
+                )
+              : CircularProgressIndicator(
+                  color: AppColors.mainColor1,
                 );
-              }),
-        ),
+        }),
         //dots
         DotsIndicator(
           //solve the problems that, the dots length is 0 , when in first init.
@@ -178,7 +186,10 @@ class _ActivityPageBody extends State<ActivityPageBody> {
   }
 
   //Widget _buildPageItem(int index, ProductModel popularProduct) {
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(
+    int index,
+    ActivityModel activityModel,
+  ) {
     //Transform anime
     Matrix4 matrix = Matrix4.identity();
     //check index
@@ -209,14 +220,17 @@ class _ActivityPageBody extends State<ActivityPageBody> {
 
     return Transform(
       transform: matrix,
-      child: Stack(
-        children: [
-          //image
-          GestureDetector(
-            onTap: () {
-              //Get.toNamed(RouteHelper.getPopularFood(index));
-            },
-            child: Container(
+      child: GestureDetector(
+        onTap: () {
+          print(index.toString() +
+              " index clicked\nactivityModel.poster: " +
+              activityModel.poster!);
+          Get.toNamed(RouteHelper.getRecommendedFood(index));
+        },
+        child: Stack(
+          children: [
+            //image
+            Container(
               height: Dimensions.pageViewContainer,
               margin: const EdgeInsets.only(left: 5, right: 5),
               decoration: BoxDecoration(
@@ -224,53 +238,53 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                   color: index.isEven
                       ? const Color(0xFF69c5df)
                       : const Color(0xFF9294cc),
-                  image: const DecorationImage(
+                  image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage("assets/image/act1.png"),
-                    //image: NetworkImage(popularProduct.img!),
+                    image: NetworkImage(
+                        AppConstants.IMG_PATH + activityModel.poster!),
                   )),
             ),
-          ),
-          //info
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: Dimensions.pageViewTextContainer,
-              margin: EdgeInsets.only(
-                  left: Dimensions.widhth30,
-                  right: Dimensions.widhth30,
-                  bottom: Dimensions.height30),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0xFFe8e8e8),
-                      offset: Offset(0, 5),
-                      blurRadius: 5.0,
-                    ),
-                    BoxShadow(color: Colors.white, offset: Offset(-5, 0)),
-                    BoxShadow(color: Colors.white, offset: Offset(5, 0)),
-                  ]),
+            //info
+            Align(
+              alignment: Alignment.bottomCenter,
               child: Container(
-                padding: EdgeInsets.only(
-                    top: Dimensions.height20,
-                    left: Dimensions.widhth10,
-                    right: Dimensions.widhth10,
-                    bottom: Dimensions.height10),
-                child: AppColumn(
-                  text: '招募音樂人/Band 隊!!!',
-                  stars: 5,
-                  comments_num: 1200,
-                  date: "5-2-2023",
-                  day: "Mon",
-                  time: "14:00",
-                  location: "循道衛理中心愛秩序灣",
+                height: Dimensions.pageViewTextContainer,
+                margin: EdgeInsets.only(
+                    left: Dimensions.widhth30,
+                    right: Dimensions.widhth30,
+                    bottom: Dimensions.height30),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0xFFe8e8e8),
+                        offset: Offset(0, 5),
+                        blurRadius: 5.0,
+                      ),
+                      BoxShadow(color: Colors.white, offset: Offset(-5, 0)),
+                      BoxShadow(color: Colors.white, offset: Offset(5, 0)),
+                    ]),
+                child: Container(
+                  padding: EdgeInsets.only(
+                      top: Dimensions.height20,
+                      left: Dimensions.widhth10,
+                      right: Dimensions.widhth10,
+                      bottom: Dimensions.height10),
+                  child: AppColumn(
+                    text: activityModel.titleEn!,
+                    stars: activityModel.stars!,
+                    comments_num: activityModel.comments!,
+                    date: activityModel.dates![0].date!,
+                    day: activityModel.dates![0].day!,
+                    time: activityModel.dates![0].startTime!,
+                    location: activityModel.location!,
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

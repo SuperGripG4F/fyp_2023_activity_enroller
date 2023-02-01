@@ -3,13 +3,13 @@ import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
 import 'package:get/get.dart';
 
 class RouteHelper {
-  static const String initial = "/";
-  static const String popularActivity = "/popular-activity";
+  static const String initial = "/home";
   static const String recommendedActivity = "/recommended-activity";
 
   static String getInitial() => '$initial';
-  //static String getPopularFood(int pageId) => '$popularFood?pageId=$pageId';
-  static String getRecommendedFood() => '$recommendedActivity';
+
+  static String getRecommendedFood(int pageId) =>
+      '$recommendedActivity?pageId=$pageId';
 
   static List<GetPage> routes = [
     GetPage(
@@ -17,11 +17,13 @@ class RouteHelper {
         page: () {
           return MainActivityPage();
         },
-        transition: Transition.leftToRight),
+        transition: Transition.native),
     GetPage(
-        name: popularActivity,
+        name: recommendedActivity,
         page: () {
-          return RecommendedActivityDetail();
+          var pageId = Get.parameters['pageId'];
+          print("pageId " + pageId! + " clicked");
+          return RecommendedActivityDetail(pageId: int.parse(pageId));
         },
         transition: Transition.rightToLeft),
   ];

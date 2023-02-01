@@ -14,7 +14,8 @@ import '../../widgets/big_text.dart';
 import '../../widgets/expandable_text_widget.dart';
 
 class RecommendedActivityDetail extends StatelessWidget {
-  const RecommendedActivityDetail({super.key});
+  int pageId;
+  RecommendedActivityDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,9 @@ class RecommendedActivityDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-                      Get.toNamed(RouteHelper.getInitial());
+                      Get.back();
                     },
                     child: AppIcon(icon: Icons.clear)),
-                //AppIcon(icon: Icons.shopping_bag_outlined)
               ],
             ),
             bottom: PreferredSize(
