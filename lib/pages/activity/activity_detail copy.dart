@@ -89,7 +89,7 @@ class ActivityDetail extends StatelessWidget {
                     SizedBox(
                       height: Dimensions.height20,
                     ),
-                    BigText(text: "Detail"),
+                    BigText(text: "Introduce"),
                     SizedBox(
                       height: Dimensions.height20,
                     ),

@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
+import 'package:fyp_2023_activity_enroller/data/controllers/recommended_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/activity_detail.dart';
+import 'package:fyp_2023_activity_enroller/pages/activity/recommended_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'helper/dependencies.dart' as dep;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 
@@ -13,6 +20,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    //for test !!!!
+    Get.find<PopularActivityController>().getPopularActivityList();
+    Get.find<RecommondedActivityController>().getRecommendedActivityList();
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Flutter Demo",
@@ -20,9 +31,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       //home: const MainActivityPage(),
-      home: ActivityDetail(
-        pageId: 0,
-      ),
+      home: RecommendedActivityDetail(
+          //pageId: 0,
+          ),
     );
   }
 }

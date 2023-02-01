@@ -1,3 +1,47 @@
+class Activity {
+  int? _totalSize;
+  int? _typeId;
+  int? _offset;
+  late List<ActivityModel> _activities;
+
+  //gettet
+  List<ActivityModel> get activities => _activities;
+
+  Activity(
+      {required totalSize,
+      required typeId,
+      required offset,
+      required activities}) {
+    this._totalSize = totalSize;
+    this._typeId = typeId;
+    this._offset = offset;
+    this._activities = activities;
+  }
+
+  Activity.fromJson(Map<String, dynamic> json) {
+    _totalSize = json['totalSize'];
+    _typeId = json['typeId'];
+    _offset = json['offset'];
+    if (json['activityModel'] != null) {
+      _activities = <ActivityModel>[];
+      json['activityModel'].forEach((v) {
+        _activities!.add(new ActivityModel.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['totalSize'] = this._totalSize;
+    data['typeId'] = this._typeId;
+    data['offset'] = this._offset;
+    if (this._activities != null) {
+      data['activityModel'] = this._activities!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
 class ActivityModel {
   String? organization;
   String? titleEn;
