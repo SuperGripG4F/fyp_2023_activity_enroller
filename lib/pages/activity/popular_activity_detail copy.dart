@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
 
 import 'package:get/get.dart';
 
 import '../../routes/route_helper.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/app_column.dart';
@@ -13,15 +15,17 @@ import '../../widgets/app_icon.dart';
 import '../../widgets/big_text.dart';
 import '../../widgets/expandable_text_widget.dart';
 
-class RecommendedActivityDetail extends StatelessWidget {
+class PopularActivityDetail extends StatelessWidget {
   int pageId;
 
-  RecommendedActivityDetail({Key? key, required this.pageId}) : super(key: key);
+  PopularActivityDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //var activityModel =  Get.find
-
+    //var product = Get.find<PopularProductController>().popularProductList[pageId];
+    var activityModel =
+        Get.find<PopularActivityController>().popularActivityList[pageId];
+    //print("in popular page" + activityModel.titleEn);
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -41,8 +45,10 @@ class RecommendedActivityDetail extends StatelessWidget {
               ],
             ),
             bottom: PreferredSize(
-                preferredSize: Size.fromHeight(20),
+                preferredSize: const Size.fromHeight(20),
                 child: Container(
+                  width: double.maxFinite,
+                  padding: const EdgeInsets.only(top: 5, bottom: 10),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -50,7 +56,8 @@ class RecommendedActivityDetail extends StatelessWidget {
                           topRight: Radius.circular(Dimensions.radius20))),
                   child: Center(
                     child: Container(
-                      margin: EdgeInsets.only(top: 10, right: 30, left: 30),
+                      margin:
+                          const EdgeInsets.only(top: 10, right: 30, left: 30),
                       width: 60,
                       height: 5,
                       decoration: BoxDecoration(
@@ -58,8 +65,6 @@ class RecommendedActivityDetail extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50)),
                     ),
                   ),
-                  width: double.maxFinite,
-                  padding: EdgeInsets.only(top: 5, bottom: 10),
                 )),
             expandedHeight: 300,
             backgroundColor: AppColors.mainColor1,
@@ -71,10 +76,13 @@ class RecommendedActivityDetail extends StatelessWidget {
                     return DetailScreen();
                   }));
                 },
-                child: Image.asset(
-                  "assets/image/act1.png",
-                  width: double.maxFinite,
-                  fit: BoxFit.fitWidth,
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                        AppConstants.IMG_PATH + activityModel.poster!),
+                  )),
                 ),
               ),
             ),
@@ -86,13 +94,13 @@ class RecommendedActivityDetail extends StatelessWidget {
                 margin: EdgeInsets.only(
                     right: Dimensions.widhth20, left: Dimensions.widhth20),
                 child: AppColumnDetail(
-                  text: '攝影比賽',
-                  stars: 5,
-                  comments_num: 1200,
-                  date: "5-2-2023",
-                  day: "Mon",
-                  time: "14:00",
-                  location: "循道衛理中心愛秩序灣",
+                  text: activityModel.titleEn,
+                  stars: activityModel.stars,
+                  comments_num: activityModel.comments,
+                  date: activityModel.dates[0].date,
+                  day: activityModel.dates[0].day,
+                  time: activityModel.dates[0].startTime,
+                  location: activityModel.location,
                 ),
               ),
             ],

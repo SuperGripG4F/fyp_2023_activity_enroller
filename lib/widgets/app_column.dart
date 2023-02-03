@@ -47,14 +47,19 @@ class AppColumn extends StatelessWidget {
                   stars,
                   (index) => Icon(
                         Icons.star,
-                        color: AppColors.mainColor1,
+                        color: AppColors.mainColor2,
                         size: 15,
                       )),
             ),
-            SizedBox(
-              width: Dimensions.widhth10,
+            Wrap(
+              children: List.generate(
+                  5 - stars,
+                  (index) => Icon(
+                        Icons.star_border_outlined,
+                        color: AppColors.mainColor2,
+                        size: 15,
+                      )),
             ),
-            SmallText(text: stars.toString()),
             SizedBox(
               width: Dimensions.widhth10,
             ),
@@ -65,7 +70,7 @@ class AppColumn extends StatelessWidget {
           height: Dimensions.height10,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconAndTextWidget(
                 icon: Icons.calendar_month,

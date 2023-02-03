@@ -2,6 +2,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
+import 'package:fyp_2023_activity_enroller/data/controllers/recommended_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
 import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
 import 'package:fyp_2023_activity_enroller/widgets/app_column_s.dart';
@@ -63,29 +64,39 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                       controller: pageController,
                       itemCount: popularActivity.popularActivityList.length,
                       itemBuilder: (context, position) {
-                        return _buildPageItem(
-                            //position, popularProducts.popularProductList[position]);
-                            position,
+                        return _buildPageItem(position,
                             popularActivity.popularActivityList[position]);
                       }),
                 )
-              : CircularProgressIndicator(
-                  color: AppColors.mainColor1,
-                );
+              : Column(children: [
+                  SizedBox(
+                    height: Dimensions.height30,
+                  ),
+                  CircularProgressIndicator(
+                    color: AppColors.mainColor1,
+                  ),
+                  SizedBox(
+                    height: Dimensions.height30,
+                  ),
+                ]);
         }),
         //dots
-        DotsIndicator(
-          //solve the problems that, the dots length is 0 , when in first init.
-          dotsCount: 5,
-          position: _currPageValue,
-          decorator: DotsDecorator(
-            activeColor: AppColors.mainColor1,
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-          ),
-        ),
+        GetBuilder<PopularActivityController>(builder: (popularActivity) {
+          return DotsIndicator(
+            //solve the problems that, the dots length is 0 , when in first init.
+            dotsCount: popularActivity.popularActivityList.length <= 0
+                ? 1
+                : popularActivity.popularActivityList.length,
+            position: _currPageValue,
+            decorator: DotsDecorator(
+              activeColor: AppColors.mainColor1,
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+            ),
+          );
+        }),
         //Recommended section
         SizedBox(
           height: Dimensions.height30,
@@ -117,70 +128,84 @@ class _ActivityPageBody extends State<ActivityPageBody> {
           ),
         ),
         //list of food and images section
-        ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            // itemCount: recommendedProducts.recommendedProductList.length,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  //Get.toNamed(RouteHelper.getRecommendedFood());
-                },
-                child: Container(
-                  margin: EdgeInsets.only(
-                      left: Dimensions.widhth20,
-                      right: Dimensions.widhth20,
-                      bottom: Dimensions.height10),
-                  child: Row(
-                    children: [
-                      Container(
-                          width: Dimensions.listViewImgSize,
-                          height: Dimensions.listViewImgSize,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                Dimensions.radius20,
+        GetBuilder<RecommondedActivityController>(
+            builder: (recommendedActivity) {
+          return recommendedActivity.isLoaded
+              ? ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: recommendedActivity.recommendedActivityList.length,
+                  itemBuilder: (context, index) {
+                    ActivityModel activityModel =
+                        recommendedActivity.recommendedActivityList[index]!;
+                    return GestureDetector(
+                      onTap: () {
+                        //Get.toNamed(RouteHelper.getRecommendedFood());
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: Dimensions.widhth20,
+                            right: Dimensions.widhth20,
+                            bottom: Dimensions.height10),
+                        child: Row(
+                          children: [
+                            Container(
+                                width: Dimensions.listViewImgSize,
+                                height: Dimensions.listViewImgSize,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      Dimensions.radius20,
+                                    ),
+                                    color: Colors.white38,
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            AppConstants.IMG_PATH +
+                                                activityModel.poster!)))),
+                            //focus the widget to get all available space
+                            Expanded(
+                              child: Container(
+                                height: Dimensions.listViewTextContSize,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                      topRight:
+                                          Radius.circular(Dimensions.radius20),
+                                      bottomRight:
+                                          Radius.circular(Dimensions.radius20)),
+                                  color: Colors.white,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    top: Dimensions.height1,
+                                    left: Dimensions.widhth10,
+                                    right: Dimensions.widhth10,
+                                    bottom: Dimensions.height1,
+                                  ),
+                                  child: AppColumnSmall(
+                                      text: activityModel.titleEn!,
+                                      stars: activityModel.stars!,
+                                      comments_num: activityModel.comments!,
+                                      date: activityModel.dates![0].date!,
+                                      day: activityModel.dates![0].day!,
+                                      time: activityModel.dates![0].startTime!,
+                                      location: activityModel.location!),
+                                ),
                               ),
-                              color: Colors.white38,
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  // image: NetworkImage(recommendedProducts
-                                  //     .recommendedProductList[index].img!
-                                  image: AssetImage("assets/image/act1.png")))),
-                      //focus the widget to get all available space
-                      Expanded(
-                        child: Container(
-                          height: Dimensions.listViewTextContSize,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(Dimensions.radius20),
-                                bottomRight:
-                                    Radius.circular(Dimensions.radius20)),
-                            color: Colors.white,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              top: Dimensions.height1,
-                              left: Dimensions.widhth10,
-                              right: Dimensions.widhth10,
-                              bottom: Dimensions.height1,
                             ),
-                            child: AppColumnSmall(
-                                text: '招募音樂人/Band 隊!!!',
-                                stars: 5,
-                                comments_num: 1200,
-                                date: "5-2-2023",
-                                day: "Mon",
-                                time: "14:00",
-                                location: "循道衛理中心愛秩序灣"),
-                          ),
+                          ],
                         ),
                       ),
-                    ],
+                    );
+                  })
+              : Column(children: [
+                  SizedBox(
+                    height: Dimensions.height30,
                   ),
-                ),
-              );
-            }),
+                  CircularProgressIndicator(
+                    color: AppColors.mainColor1,
+                  ),
+                ]);
+        }),
       ],
     );
   }
@@ -225,7 +250,7 @@ class _ActivityPageBody extends State<ActivityPageBody> {
           print(index.toString() +
               " index clicked\nactivityModel.poster: " +
               activityModel.poster!);
-          Get.toNamed(RouteHelper.getRecommendedFood(index));
+          Get.toNamed(RouteHelper.getPopularActivity(index));
         },
         child: Stack(
           children: [

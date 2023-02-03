@@ -25,7 +25,7 @@ class RecommondedActivityController extends GetxController {
       _recommendedActivityList = [];
       _recommendedActivityList
           .addAll(Activity.fromJson(response.body).activities);
-      print(_recommendedActivityList[0].desc);
+      //print(_recommendedActivityList[0].desc);
       _isLoaded = true;
       update();
     } else {
