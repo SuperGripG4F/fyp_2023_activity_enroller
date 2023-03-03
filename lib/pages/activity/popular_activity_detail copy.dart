@@ -93,16 +93,16 @@ class PopularActivityDetail extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(
                     right: Dimensions.widhth20, left: Dimensions.widhth20),
-                child: AppColumnDetail(
-                  text: activityModel.titleEn,
-                  stars: activityModel.stars,
-                  comments_num: activityModel.comments,
-                  date: activityModel.dates[0].date,
-                  day: activityModel.dates[0].day,
-                  time: activityModel.dates[0].startTime,
-                  location: activityModel.location,
-                ),
+                //child: AppColumnDetail(
+                //text: activityModel.titleEn,
+                //stars: activityModel.stars,
+                //comments_num: activityModel.comments,
+                //date: activityModel.dates[0].date,
+                //day: activityModel.dates[0].day,
+                //time: activityModel.dates[0].startTime,
+                //location: activityModel.location,
               ),
+              //),
             ],
           ))
         ],

@@ -86,6 +86,7 @@ class RecommendedActivityDetail extends StatelessWidget {
                 margin: EdgeInsets.only(
                     right: Dimensions.widhth20, left: Dimensions.widhth20),
                 child: AppColumnDetail(
+                  pageId: pageId,
                   text: '攝影比賽',
                   stars: 5,
                   comments_num: 1200,
