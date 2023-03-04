@@ -1,3 +1,4 @@
+import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/popular_activity_detail%20copy.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/recommended_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
@@ -20,7 +21,8 @@ class RouteHelper {
     GetPage(
         name: initial,
         page: () {
-          return MainActivityPage();
+          //return MainActivityPage();
+          return SideMenu();
         },
         transition: Transition.native),
     GetPage(

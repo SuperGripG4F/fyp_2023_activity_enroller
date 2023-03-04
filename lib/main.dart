@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/recommended_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/activity_detail.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainActivityPage(),
+      //home: MainActivityPage(),
+      home: SideMenu(),
       initialRoute: RouteHelper.initial,
       getPages: RouteHelper.routes,
     );
