@@ -122,7 +122,7 @@ class _ActivityPageBody extends State<ActivityPageBody> {
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: 2),
-                child: SmallText(text: "Acitvities"),
+                child: const SmallText(text: "Acitvities"),
               ),
             ],
           ),

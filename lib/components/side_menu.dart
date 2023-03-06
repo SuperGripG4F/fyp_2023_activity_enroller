@@ -6,13 +6,17 @@ import 'package:fyp_2023_activity_enroller/components/side_menu_tile.dart';
 import 'package:fyp_2023_activity_enroller/models/rive_asset.dart';
 import 'package:rive/rive.dart';
 
+import '../utils/colors.dart';
+import '../utils/dimensions.dart';
 import '../utils/rive_utils.dart';
 import 'info_card.dart';
 
 // ignore: prefer_const_constructors
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({super.key});
+  const SideMenu({
+    super.key,
+  });
 
   @override
   State<SideMenu> createState() => _MyWidgetState();
@@ -20,6 +24,7 @@ class SideMenu extends StatefulWidget {
 
 class _MyWidgetState extends State<SideMenu> {
   RiveAsset selectedMenu = sideMenus.first;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
