@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/activity_page_body.dart';
+import 'package:fyp_2023_activity_enroller/pages/home/enrty_point.dart';
 import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
 
 import '../../utils/colors.dart';
@@ -33,11 +34,10 @@ class MainActivityPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          SmallText(
+                          const SmallText(
                             text: AppConstants.APP_VERSION,
                             color: Colors.black54,
                           ),
-                          //Icon(Icons.arrow_drop_down_rounded)
                         ],
                       )
                     ],
@@ -47,7 +47,7 @@ class MainActivityPage extends StatelessWidget {
                       width: Dimensions.widhth45,
                       height: Dimensions.height45,
                       child: Icon(
-                        Icons.search,
+                        Icons.menu,
                         color: Colors.white,
                         size: Dimensions.size24,
                       ),
@@ -63,10 +63,15 @@ class MainActivityPage extends StatelessWidget {
           //showing the body
           Expanded(
               child: SingleChildScrollView(
-            child: ActivityPageBody(),
+            child: Column(
+              children: [
+                ActivityPageBody(),
+              ],
+            ),
           )),
         ],
       ),
+      bottomNavigationBar: EntryPoint(),
     );
   }
 }

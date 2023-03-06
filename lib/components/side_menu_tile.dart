@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_2023_activity_enroller/utils/colors.dart';
 import 'package:rive/rive.dart';
 
 import '../models/rive_asset.dart';
@@ -28,21 +29,38 @@ class SideMenuTile extends StatelessWidget {
             height: 1,
           ),
         ),
-        ListTile(
-            onTap: press,
-            leading: SizedBox(
-              height: 34,
-              width: 34,
-              child: RiveAnimation.asset(
-                menu.src,
-                artboard: menu.artboard,
-                onInit: riveonInit,
+        Stack(
+          children: [
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.fastLinearToSlowEaseIn,
+              //animate
+              height: 56,
+              width: isActive ? 288 : 0,
+              left: 0,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: AppColors.mainColor2,
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
               ),
             ),
-            title: Text(
-              menu.title,
-              style: TextStyle(color: Colors.white),
-            )),
+            ListTile(
+                onTap: press,
+                leading: SizedBox(
+                  height: 34,
+                  width: 34,
+                  child: RiveAnimation.asset(
+                    menu.src,
+                    artboard: menu.artboard,
+                    onInit: riveonInit,
+                  ),
+                ),
+                title: Text(
+                  menu.title,
+                  style: const TextStyle(color: Colors.white),
+                )),
+          ],
+        ),
       ],
     );
   }

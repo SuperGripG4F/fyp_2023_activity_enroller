@@ -19,6 +19,7 @@ class SideMenu extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<SideMenu> {
+  RiveAsset selectedMenu = sideMenus.first;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +29,7 @@ class _MyWidgetState extends State<SideMenu> {
         color: Color(0xFF17203A),
         child: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InfoCard(
                 name: "Wong",
@@ -44,16 +46,51 @@ class _MyWidgetState extends State<SideMenu> {
               ...sideMenus.map((menu) => SideMenuTile(
                     menu: menu,
                     press: () {
-                      // menu.input!.change(true);
+                      menu.input!.change(true);
+                      Future.delayed(Duration(seconds: 1), () {
+                        menu.input!.change(false);
+                      });
+
+                      setState(() {
+                        selectedMenu = menu;
+                      });
                     },
                     riveonInit: (artboard) {
-                      // StateMachineController controller =
-                      //     RiveUtils.getRiveController(artboard,
-                      //         stateMachineName: menu.stateMachineName);
-                      //menu.input = controller.findSMI("active") as SMIBool;
+                      StateMachineController controller =
+                          RiveUtils.getRiveController(artboard,
+                              stateMachineName: menu.stateMachineName);
+                      menu.input = controller.findSMI("active") as SMIBool;
                     },
-                    isActive: false,
-                  ))
+                    isActive: selectedMenu == menu,
+                  )),
+              Padding(
+                padding: const EdgeInsets.only(left: 24, top: 32, bottom: 16),
+                child: Text("Histroy",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(color: Colors.white70)),
+              ),
+              ...sideMenus2.map((menu) => SideMenuTile(
+                    menu: menu,
+                    press: () {
+                      menu.input!.change(true);
+                      Future.delayed(Duration(seconds: 1), () {
+                        menu.input!.change(false);
+                      });
+
+                      setState(() {
+                        selectedMenu = menu;
+                      });
+                    },
+                    riveonInit: (artboard) {
+                      StateMachineController controller =
+                          RiveUtils.getRiveController(artboard,
+                              stateMachineName: menu.stateMachineName);
+                      menu.input = controller.findSMI("active") as SMIBool;
+                    },
+                    isActive: selectedMenu == menu,
+                  )),
             ],
           ),
         ),
