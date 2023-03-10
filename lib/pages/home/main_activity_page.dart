@@ -3,7 +3,6 @@ import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/activity_page_body.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/enrty_point.dart';
 import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
-import 'package:rive/rive.dart';
 
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
@@ -59,33 +58,31 @@ class _MainActivityPageState extends State<MainActivityPage>
             children: [
               //showing the header
               Container(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 45, bottom: 15),
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Column(children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            BigText(
-                              text: AppConstants.APP_NAME,
-                              color: AppColors.mainColor1,
-                            ),
-                            Row(
-                              children: [
-                                const SmallText(
-                                  text: AppConstants.APP_VERSION,
-                                  color: Colors.black54,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ]),
-                ),
+                margin: const EdgeInsets.only(top: 45, bottom: 15),
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          BigText(
+                            text: AppConstants.APP_NAME,
+                            color: AppColors.mainColor1,
+                          ),
+                          Row(
+                            children: [
+                              const SmallText(
+                                text: AppConstants.APP_VERSION,
+                                color: Colors.black54,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ]),
               ),
               //showing the body
               Expanded(
@@ -99,6 +96,7 @@ class _MainActivityPageState extends State<MainActivityPage>
             ],
           ),
         ),
+        //sideMenu
         AnimatedPositioned(
           duration: Duration(milliseconds: 200),
           curve: Curves.fastOutSlowIn,
@@ -111,8 +109,8 @@ class _MainActivityPageState extends State<MainActivityPage>
         AnimatedPositioned(
           duration: Duration(milliseconds: 200),
           curve: Curves.fastOutSlowIn,
-          top: isSideBarClosed ? -10 : 16,
-          left: isSideBarClosed ? 300 : 200,
+          top: isSideBarClosed ? -6 : 16,
+          left: isSideBarClosed ? 320 : 200,
           child: SafeArea(
             //alignment: Alignment.topLeft,
             child: GestureDetector(

@@ -4,6 +4,7 @@ class AppConstants {
   static const String POPULAR_ACTIVITY_URL = "/api/v1/activities/popular";
   static const String RECOMMENDED_ACTIVITY_URL =
       "/api/v1/activities/recommended";
+  static const String SEARCH_ACTIVITY_URL = "/api/v1/activities/search";
 
   static const String TOKEN = "DBtoken";
   static const String APP_NAME = "Activity Helper";

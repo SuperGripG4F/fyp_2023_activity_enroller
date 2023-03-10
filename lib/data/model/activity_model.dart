@@ -25,7 +25,7 @@ class Activity {
     if (json['activityModel'] != null) {
       _activities = <ActivityModel>[];
       json['activityModel'].forEach((v) {
-        _activities!.add(new ActivityModel.fromJson(v));
+        _activities.add(new ActivityModel.fromJson(v));
       });
     }
   }
@@ -36,7 +36,7 @@ class Activity {
     data['typeId'] = this._typeId;
     data['offset'] = this._offset;
     if (this._activities != null) {
-      data['activityModel'] = this._activities!.map((v) => v.toJson()).toList();
+      data['activityModel'] = this._activities.map((v) => v.toJson()).toList();
     }
     return data;
   }

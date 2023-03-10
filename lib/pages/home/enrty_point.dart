@@ -3,7 +3,7 @@ import 'package:fyp_2023_activity_enroller/utils/colors.dart';
 import 'package:rive/rive.dart';
 
 import '../../components/Animated_bar.dart';
-import '../../models/rive_asset.dart';
+import '../../data/model/rive_asset.dart';
 import '../../utils/rive_utils.dart';
 
 class EntryPoint extends StatefulWidget {

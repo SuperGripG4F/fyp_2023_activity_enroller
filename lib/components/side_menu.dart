@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp_2023_activity_enroller/components/side_menu_tile.dart';
-import 'package:fyp_2023_activity_enroller/models/rive_asset.dart';
+import 'package:fyp_2023_activity_enroller/data/model/rive_asset.dart';
 import 'package:rive/rive.dart';
 
 import '../utils/colors.dart';

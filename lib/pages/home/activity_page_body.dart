@@ -31,6 +31,7 @@ class _ActivityPageBody extends State<ActivityPageBody> {
   var _currPageValue = 0.0;
   double _scaleFactor = 0.8;
   double _height = Dimensions.pageViewContainer;
+
   @override
   void initState() {
     super.initState();

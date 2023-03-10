@@ -1,10 +1,12 @@
 import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
-import 'package:fyp_2023_activity_enroller/pages/activity/popular_activity_detail%20copy.dart';
+import 'package:fyp_2023_activity_enroller/pages/activity/popular_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/recommended_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
 import 'package:get/get.dart';
 
+import '../pages/activity/popular_activity_detail.dart';
 import '../pages/home/enrty_point.dart';
+import '../pages/search/search_page.dart';
 
 class RouteHelper {
   static const String initial = "/home";
@@ -25,8 +27,8 @@ class RouteHelper {
     GetPage(
         name: initial,
         page: () {
-          return MainActivityPage();
-          //return const SideMenu();
+          //return MainActivityPage();
+          return MySearchPage(data: ["hello", "world"]);
         },
         transition: Transition.native),
     GetPage(

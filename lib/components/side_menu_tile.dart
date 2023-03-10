@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp_2023_activity_enroller/utils/colors.dart';
 import 'package:rive/rive.dart';
 
-import '../models/rive_asset.dart';
+import '../data/model/rive_asset.dart';
 
 class SideMenuTile extends StatelessWidget {
   const SideMenuTile({

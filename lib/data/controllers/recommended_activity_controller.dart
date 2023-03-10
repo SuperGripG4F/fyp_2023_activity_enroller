@@ -1,6 +1,5 @@
 import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
-import 'package:fyp_2023_activity_enroller/data/repository/popular_activity_repo.dart';
-import 'package:fyp_2023_activity_enroller/data/repository/recommend_product_repo.dart';
+import 'package:fyp_2023_activity_enroller/data/repository/recommend_activity_repo.dart';
 import 'package:get/get.dart';
 
 class RecommondedActivityController extends GetxController {
