@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainActivityPage(),
-      //home: SideMenu(),
+      popGesture: false,
+      //home: MainActivityPage(), it will route to '/'
       initialRoute: RouteHelper.initial,
       getPages: RouteHelper.routes,
     );

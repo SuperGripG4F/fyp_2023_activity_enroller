@@ -43,12 +43,11 @@ class _ActivityPageBody extends State<ActivityPageBody> {
     });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    //let the memory management system know that i don't need this thing just to remove them from the memory.
-    pageController.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   pageController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

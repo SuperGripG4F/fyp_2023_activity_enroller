@@ -4,9 +4,11 @@ import 'package:fyp_2023_activity_enroller/data/controllers/search_activity_cont
 import 'package:fyp_2023_activity_enroller/data/repository/popular_activity_repo.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/recommend_activity_repo.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/search_activity_repo.dart';
+import 'package:fyp_2023_activity_enroller/routes/route_observer.dart';
 import 'package:get/get.dart';
 
 import '../data/api/api_client.dart';
+import '../routes/bottomNav_helper.dart';
 import '../utils/app_constants.dart';
 
 Future<void> init() async {
@@ -23,4 +25,7 @@ Future<void> init() async {
   Get.lazyPut(
       () => RecommondedActivityController(recommendedActivityRepo: Get.find()));
   Get.lazyPut(() => SeacrhActivityController(searchActivityRepo: Get.find()));
+
+  Get.put(BottomNavHelper());
+  Get.put(RouteObserver());
 }

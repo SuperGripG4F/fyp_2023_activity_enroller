@@ -12,6 +12,7 @@ class RouteHelper {
   static const String initial = "/home";
   static const String recommendedActivity = "/recommended-activity";
   static const String popularActivity = "/popular-activity";
+  static const String searchActivity = "/search-activity";
 
   static bool get kDebugMode => true;
 
@@ -23,14 +24,17 @@ class RouteHelper {
   static String getRecommandedActivity(int pageId) =>
       '$recommendedActivity?pageId=$pageId';
 
+  static String getSearchActivity() => '$searchActivity';
+
   static List<GetPage> routes = [
     GetPage(
         name: initial,
         page: () {
-          //return MainActivityPage();
-          return MySearchPage(data: ["hello", "world"]);
+          return MainActivityPage();
+          //return SearchPage();
         },
-        transition: Transition.native),
+        transition: Transition.cupertinoDialog,
+        fullscreenDialog: true),
     GetPage(
         name: popularActivity,
         page: () {
@@ -55,5 +59,13 @@ class RouteHelper {
           );
         },
         transition: Transition.rightToLeft),
+    GetPage(
+      name: searchActivity,
+      page: () {
+        return SearchPage();
+      },
+      fullscreenDialog: true,
+      transition: Transition.cupertinoDialog,
+    ),
   ];
 }

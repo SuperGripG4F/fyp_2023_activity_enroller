@@ -17,7 +17,7 @@ class RiveAsset {
 
 List<RiveAsset> bottomNavs = [
   RiveAsset("assets/RiveAssets/icons.riv",
-      artboard: "CHAT", stateMachineName: "CHAT_Interactivity", title: "Chat"),
+      artboard: "HOME", stateMachineName: "HOME_interactivity", title: "Home"),
   RiveAsset("assets/RiveAssets/icons.riv",
       artboard: "SEARCH",
       stateMachineName: "SEARCH_Interactivity",
@@ -47,8 +47,8 @@ List<RiveAsset> sideMenus = [
       artboard: "LIKE/STAR",
       stateMachineName: "STAR_Interactivity",
       title: "Favorites"),
-  RiveAsset("assets/RiveAssets/icons.riv",
-      artboard: "CHAT", stateMachineName: "CHAT_Interactivity", title: "Help"),
+  // RiveAsset("assets/RiveAssets/icons.riv",
+  //     artboard: "CHAT", stateMachineName: "CHAT_Interactivity", title: "Help"),
 ];
 
 List<RiveAsset> sideMenus2 = [

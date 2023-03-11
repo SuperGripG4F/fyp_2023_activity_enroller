@@ -31,4 +31,11 @@ class RecommondedActivityController extends GetxController {
       //failed return
     }
   }
+
+  @override
+  void onClose() {
+    // 取消未完成的异步任务或网络请求
+    _isLoaded = false;
+    super.onClose();
+  }
 }

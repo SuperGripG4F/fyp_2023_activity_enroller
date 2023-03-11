@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fyp_2023_activity_enroller/pages/search/search_page_body.dart';
+import 'package:get/get.dart';
 
+import '../../routes/bottomNav_helper.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/colors.dart';
 import '../../widgets/big_text.dart';
@@ -8,19 +10,8 @@ import '../../widgets/small_text.dart';
 import '../home/activity_page_body.dart';
 import '../home/enrty_point.dart';
 
-class MySearchPage extends StatefulWidget {
-  final List<String> data; // 数据源
-
-  MySearchPage({required this.data});
-
-  @override
-  _MySearchPageState createState() => _MySearchPageState();
-}
-
-class _MySearchPageState extends State<MySearchPage>
-    with SingleTickerProviderStateMixin {
-  final TextEditingController _searchController = TextEditingController();
-  List<String> _searchResult = [];
+class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +49,7 @@ class _MySearchPageState extends State<MySearchPage>
                     ),
                   ]),
                 ),
-                Expanded(
+                const Expanded(
                     child: SingleChildScrollView(
                   child: SearchPageBody(),
                 )),
@@ -67,19 +58,5 @@ class _MySearchPageState extends State<MySearchPage>
           ],
         ),
         bottomNavigationBar: const EntryPoint());
-  }
-
-  void _search(String query) {
-    List<String> results = [];
-    // 根据搜索查询过滤数据
-    widget.data
-        .where((item) => item.toLowerCase().contains(query.toLowerCase()))
-        .forEach((item) {
-      results.add(item);
-    });
-    // 更新状态以显示搜索结果
-    setState(() {
-      _searchResult = results;
-    });
   }
 }

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_2023_activity_enroller/routes/bottomNav_helper.dart';
 import 'package:fyp_2023_activity_enroller/utils/colors.dart';
+import 'package:get/get.dart';
 import 'package:rive/rive.dart';
 
 import '../../components/Animated_bar.dart';
 import '../../data/model/rive_asset.dart';
+import '../../routes/bottomNav_helper.dart';
+import '../../routes/route_helper.dart';
 import '../../utils/rive_utils.dart';
+import '../search/search_page.dart';
+import 'main_activity_page.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
@@ -14,9 +20,13 @@ class EntryPoint extends StatefulWidget {
 }
 
 class _EntryPointState extends State<EntryPoint> {
+  final BottomNavHelper bottomNavHelper = Get.find<BottomNavHelper>();
+
   RiveAsset selectedBottomNav = bottomNavs.first;
   @override
   Widget build(BuildContext context) {
+    selectedBottomNav = bottomNavs[bottomNavHelper.pageValue];
+
     return Container(
       padding: const EdgeInsets.only(bottom: 25, top: 12, left: 20, right: 20),
       decoration: const BoxDecoration(
@@ -33,12 +43,21 @@ class _EntryPointState extends State<EntryPoint> {
                       if (bottomNavs[index] != selectedBottomNav) {
                         setState(() {
                           selectedBottomNav = bottomNavs[index];
+                          bottomNavHelper.pageValue = index;
+                          if (bottomNavHelper.pageValue == 0) {
+                            Get.offNamed(
+                              RouteHelper.getInitial(),
+                            );
+                          } else if (bottomNavHelper.pageValue == 1) {
+                            print(Get.routing);
+                            Get.offNamed(RouteHelper.getSearchActivity());
+                          }
                         });
                       }
                       Future.delayed(const Duration(seconds: 1), () {
                         bottomNavs[index].input!.change(false);
                       });
-                      print(index.toString() + " taped ");
+                      //print(index.toString() + " taped ");
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,

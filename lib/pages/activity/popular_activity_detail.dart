@@ -22,10 +22,8 @@ class PopularActivityDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var product = Get.find<PopularProductController>().popularProductList[pageId];
     var activityModel =
         Get.find<PopularActivityController>().popularActivityList[pageId];
-    //print("in popular page" + activityModel.titleEn);
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
