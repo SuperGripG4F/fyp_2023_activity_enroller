@@ -8,6 +8,7 @@ import 'package:fyp_2023_activity_enroller/routes/route_observer.dart';
 import 'package:get/get.dart';
 
 import '../data/api/api_client.dart';
+import '../data/controllers/login_controller.dart';
 import '../routes/bottomNav_helper.dart';
 import '../utils/app_constants.dart';
 
@@ -25,6 +26,7 @@ Future<void> init() async {
   Get.lazyPut(
       () => RecommondedActivityController(recommendedActivityRepo: Get.find()));
   Get.lazyPut(() => SeacrhActivityController(searchActivityRepo: Get.find()));
+  Get.lazyPut(() => LoginController(apiClient: Get.find()));
 
   Get.put(BottomNavHelper());
   Get.put(RouteObserver());

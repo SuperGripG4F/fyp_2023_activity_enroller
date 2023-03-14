@@ -2,6 +2,7 @@ import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/popular_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/recommended_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
+import 'package:fyp_2023_activity_enroller/pages/login/login_page.dart';
 import 'package:get/get.dart';
 
 import '../pages/activity/popular_activity_detail.dart';
@@ -33,7 +34,8 @@ class RouteHelper {
     GetPage(
         name: initial,
         page: () {
-          return MainActivityPage();
+          //return MainActivityPage();
+          return LoginPage();
         },
         transition: Transition.cupertinoDialog,
         fullscreenDialog: true),

@@ -20,7 +20,7 @@ class SeacrhActivityController extends GetxController {
       print("got all activity");
       _ActivityList = [];
       _ActivityList.addAll(Activity.fromJson(response.body).activities);
-      print(_ActivityList[0].desc);
+      //print(_ActivityList[0].desc);
       _isLoaded = true;
       update();
     } else {}
