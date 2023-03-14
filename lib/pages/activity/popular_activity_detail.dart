@@ -71,7 +71,7 @@ class PopularActivityDetail extends StatelessWidget {
               background: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return DetailScreen();
+                    return DetailScreen(activityModel: activityModel);
                   }));
                 },
                 child: Container(
@@ -91,16 +91,16 @@ class PopularActivityDetail extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(
                     right: Dimensions.widhth20, left: Dimensions.widhth20),
-                //child: AppColumnDetail(
-                //text: activityModel.titleEn,
-                //stars: activityModel.stars,
-                //comments_num: activityModel.comments,
-                //date: activityModel.dates[0].date,
-                //day: activityModel.dates[0].day,
-                //time: activityModel.dates[0].startTime,
-                //location: activityModel.location,
+                child: AppColumnDetail(
+                  text: activityModel.titleEn,
+                  stars: activityModel.stars,
+                  comments_num: activityModel.comments,
+                  date: activityModel.dates[0].date,
+                  day: activityModel.dates[0].day,
+                  time: activityModel.dates[0].startTime,
+                  location: activityModel.location,
+                ),
               ),
-              //),
             ],
           ))
         ],
@@ -163,6 +163,10 @@ class PopularActivityDetail extends StatelessWidget {
 }
 
 class DetailScreen extends StatelessWidget {
+  var activityModel;
+
+  DetailScreen({Key? key, required this.activityModel}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,9 +174,9 @@ class DetailScreen extends StatelessWidget {
         child: Container(
           color: AppColors.mainColor1,
           child: Center(
-            child: Image.asset(
-              'assets/image/act1.png',
-            ),
+            child: Image(
+                image: NetworkImage(
+                    AppConstants.IMG_PATH + activityModel.poster!)),
           ),
         ),
         onTap: () {

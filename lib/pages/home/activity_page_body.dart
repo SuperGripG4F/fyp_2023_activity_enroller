@@ -140,7 +140,7 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                         recommendedActivity.recommendedActivityList[index]!;
                     return GestureDetector(
                       onTap: () {
-                        //Get.toNamed(RouteHelper.getRecommendedFood());
+                        Get.toNamed(RouteHelper.getRecommandedActivity(index));
                       },
                       child: Container(
                         margin: EdgeInsets.only(

@@ -11,7 +11,7 @@ import 'expandable_text_widget.dart';
 import 'icon_and_text_widget.dart';
 
 class AppColumnDetail extends StatelessWidget {
-  final int pageId;
+  //final int pageId;
 
   final String text;
   final int stars;
@@ -21,16 +21,17 @@ class AppColumnDetail extends StatelessWidget {
   final String time;
   final String location;
 
-  const AppColumnDetail(
-      {super.key,
-      required this.text,
-      required this.stars,
-      required this.comments_num,
-      required this.date,
-      required this.day,
-      required this.time,
-      required this.location,
-      required this.pageId});
+  const AppColumnDetail({
+    super.key,
+    required this.text,
+    required this.stars,
+    required this.comments_num,
+    required this.date,
+    required this.day,
+    required this.time,
+    required this.location,
+    //required this.pageId
+  });
 
   @override
   Widget build(BuildContext context) {

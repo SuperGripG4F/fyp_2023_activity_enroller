@@ -4,7 +4,9 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:get/get.dart';
 
+import '../../data/controllers/recommended_activity_controller.dart';
 import '../../routes/route_helper.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/app_column.dart';
@@ -20,7 +22,8 @@ class RecommendedActivityDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var activityModel =  Get.find
+    var activityModel = Get.find<RecommondedActivityController>()
+        .recommendedActivityList[pageId];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -41,16 +44,19 @@ class RecommendedActivityDetail extends StatelessWidget {
               ],
             ),
             bottom: PreferredSize(
-                preferredSize: Size.fromHeight(20),
+                preferredSize: const Size.fromHeight(20),
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(Dimensions.radius20),
                           topRight: Radius.circular(Dimensions.radius20))),
+                  width: double.maxFinite,
+                  padding: const EdgeInsets.only(top: 5, bottom: 10),
                   child: Center(
                     child: Container(
-                      margin: EdgeInsets.only(top: 10, right: 30, left: 30),
+                      margin:
+                          const EdgeInsets.only(top: 10, right: 30, left: 30),
                       width: 60,
                       height: 5,
                       decoration: BoxDecoration(
@@ -58,8 +64,6 @@ class RecommendedActivityDetail extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50)),
                     ),
                   ),
-                  width: double.maxFinite,
-                  padding: EdgeInsets.only(top: 5, bottom: 10),
                 )),
             expandedHeight: 300,
             backgroundColor: AppColors.mainColor1,
@@ -68,13 +72,16 @@ class RecommendedActivityDetail extends StatelessWidget {
               background: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return DetailScreen();
+                    return DetailScreen(activityModel: activityModel);
                   }));
                 },
-                child: Image.asset(
-                  "assets/image/act1.png",
-                  width: double.maxFinite,
-                  fit: BoxFit.fitWidth,
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                        AppConstants.IMG_PATH + activityModel.poster!),
+                  )),
                 ),
               ),
             ),
@@ -86,14 +93,13 @@ class RecommendedActivityDetail extends StatelessWidget {
                 margin: EdgeInsets.only(
                     right: Dimensions.widhth20, left: Dimensions.widhth20),
                 child: AppColumnDetail(
-                  pageId: pageId,
-                  text: '攝影比賽',
-                  stars: 5,
-                  comments_num: 1200,
-                  date: "5-2-2023",
-                  day: "Mon",
-                  time: "14:00",
-                  location: "循道衛理中心愛秩序灣",
+                  text: activityModel.titleEn,
+                  stars: activityModel.stars,
+                  comments_num: activityModel.comments,
+                  date: activityModel.dates[0].date,
+                  day: activityModel.dates[0].day,
+                  time: activityModel.dates[0].startTime,
+                  location: activityModel.location,
                 ),
               ),
             ],
@@ -129,7 +135,7 @@ class RecommendedActivityDetail extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius20),
                       color: Colors.white),
-                  child: Icon(
+                  child: const Icon(
                     Icons.favorite,
                     color: AppColors.mainColor1,
                   ),
@@ -158,6 +164,10 @@ class RecommendedActivityDetail extends StatelessWidget {
 }
 
 class DetailScreen extends StatelessWidget {
+  var activityModel;
+
+  DetailScreen({Key? key, required this.activityModel}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -165,9 +175,9 @@ class DetailScreen extends StatelessWidget {
         child: Container(
           color: AppColors.mainColor1,
           child: Center(
-            child: Image.asset(
-              'assets/image/act1.png',
-            ),
+            child: Image(
+                image: NetworkImage(
+                    AppConstants.IMG_PATH + activityModel.poster!)),
           ),
         ),
         onTap: () {

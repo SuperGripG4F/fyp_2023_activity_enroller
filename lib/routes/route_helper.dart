@@ -13,6 +13,7 @@ class RouteHelper {
   static const String recommendedActivity = "/recommended-activity";
   static const String popularActivity = "/popular-activity";
   static const String searchActivity = "/search-activity";
+  // static const String imgDetail = "/img-detail";
 
   static bool get kDebugMode => true;
 
@@ -26,12 +27,13 @@ class RouteHelper {
 
   static String getSearchActivity() => '$searchActivity';
 
+  // static String getimgDetail(int pageId) => '$imgDetail?pageId=$pageId';
+
   static List<GetPage> routes = [
     GetPage(
         name: initial,
         page: () {
           return MainActivityPage();
-          //return SearchPage();
         },
         transition: Transition.cupertinoDialog,
         fullscreenDialog: true),
