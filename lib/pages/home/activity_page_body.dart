@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -247,9 +248,11 @@ class _ActivityPageBody extends State<ActivityPageBody> {
       transform: matrix,
       child: GestureDetector(
         onTap: () {
-          print(index.toString() +
-              " index clicked\nactivityModel.poster: " +
-              activityModel.poster!);
+          if (kDebugMode) {
+            print(index.toString() +
+                " index clicked\nactivityModel.poster: " +
+                activityModel.poster!);
+          }
           Get.toNamed(RouteHelper.getPopularActivity(index));
         },
         child: Stack(

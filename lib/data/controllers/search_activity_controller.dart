@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/search_activity_repo.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,9 @@ class SeacrhActivityController extends GetxController {
   bool get isLoaded => _isLoaded;
 
   Future<void> getActivityList() async {
-    print("getting activity....");
+    if (kDebugMode) {
+      print("getting activity....");
+    }
     Response response = await searchActivityRepo.getActivityList();
     if (response.statusCode == 200) {
       print("got all activity");

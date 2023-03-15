@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp_2023_activity_enroller/routes/bottomNav_helper.dart';
 import 'package:fyp_2023_activity_enroller/utils/colors.dart';
@@ -49,7 +50,9 @@ class _EntryPointState extends State<EntryPoint> {
                               RouteHelper.getInitial(),
                             );
                           } else if (bottomNavHelper.pageValue == 1) {
-                            print(Get.routing);
+                            if (kDebugMode) {
+                              print(Get.routing);
+                            }
                             Get.offNamed(RouteHelper.getSearchActivity());
                           }
                         });

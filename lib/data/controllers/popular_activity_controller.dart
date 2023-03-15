@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/popular_activity_repo.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,9 @@ class PopularActivityController extends GetxController {
     //everthing save here
     Response response = await popularActivityRepo.getPopularActivityList();
     if (response.statusCode == 200) {
-      print("got activity");
+      if (kDebugMode) {
+        print("got activity");
+      }
       _popularActivityList = [];
       _popularActivityList.addAll(Activity.fromJson(response.body).activities);
       //print(_popularActivityList[0].titleEn);

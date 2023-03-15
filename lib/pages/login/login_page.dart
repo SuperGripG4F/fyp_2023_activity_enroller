@@ -18,6 +18,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset("assets/image/logo.png"),
               TextFormField(
                 onChanged: (value) =>
                     Get.find<LoginController>().email.value = value,

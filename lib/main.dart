@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       popGesture: false,
-      //home: MainActivityPage(), it will route to '/'
-      initialRoute: RouteHelper.initial,
+      //home: RouteHelper.getInitial(), // it will go to '/'
+      initialRoute: RouteHelper.getLogin(),
       getPages: RouteHelper.routes,
     );
   }

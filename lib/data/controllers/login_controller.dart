@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../utils/app_constants.dart';
@@ -24,7 +25,9 @@ class LoginController extends GetxController {
     final response = await apiClient.postData(
         AppConstants.LOGIN, {'email': email.value, 'password': password.value});
     if (response.statusCode == 200) {
-      print("login success");
+      if (kDebugMode) {
+        print("login success");
+      }
       // todo
 
       _isLoaded = true;

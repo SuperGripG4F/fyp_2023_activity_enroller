@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/recommend_activity_repo.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,9 @@ class RecommondedActivityController extends GetxController {
     Response response =
         await recommendedActivityRepo.getRecommendedActivityList();
     if (response.statusCode == 200) {
-      print("got recommended");
+      if (kDebugMode) {
+        print("got recommended");
+      }
       _recommendedActivityList = [];
       _recommendedActivityList
           .addAll(Activity.fromJson(response.body).activities);
