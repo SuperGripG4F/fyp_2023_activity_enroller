@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/activity_page_body.dart';
-import 'package:fyp_2023_activity_enroller/pages/home/enrty_point.dart';
+import 'package:fyp_2023_activity_enroller/widgets/enrty_point.dart';
 import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
 
 import '../../utils/colors.dart';

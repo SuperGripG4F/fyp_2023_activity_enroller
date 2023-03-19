@@ -8,6 +8,7 @@ class AppConstants {
   static const String RECOMMENDED_ACTIVITY_URL =
       "/api/v1/activities/recommended";
   static const String SEARCH_ACTIVITY_URL = "/api/v1/activities/search";
+  static const String ANNOUNCEMENT_URL = "/api/v1/activities/announcements/";
 
   static String TOKEN = "";
   static const String APP_NAME = "Activity Helper";

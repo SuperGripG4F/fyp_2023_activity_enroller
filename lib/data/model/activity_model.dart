@@ -80,11 +80,11 @@ class ActivityModel {
 
   ActivityModel.fromJson(Map<String, dynamic> json) {
     organization = json['organization'];
-    titleEn = json['title-en'];
-    titleZh = json['title-zh'];
+    titleEn = json['title_en'];
+    titleZh = json['title_zh'];
     slogan = json['slogan'];
     poster = json['poster'];
-    activityLength = json['activity-length'];
+    activityLength = json['activity_length'];
     if (json['dates'] != null) {
       dates = <Dates>[];
       json['dates'].forEach((v) {
@@ -105,11 +105,11 @@ class ActivityModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['organization'] = this.organization;
-    data['title-en'] = this.titleEn;
-    data['title-zh'] = this.titleZh;
+    data['title_en'] = this.titleEn;
+    data['title_zh'] = this.titleZh;
     data['poster'] = this.poster;
     data['slogan'] = this.slogan;
-    data['activity-length'] = this.activityLength;
+    data['activity_length'] = this.activityLength;
     if (this.dates != null) {
       data['dates'] = this.dates!.map((v) => v.toJson()).toList();
     }
@@ -136,16 +136,16 @@ class Dates {
 
   Dates.fromJson(Map<String, dynamic> json) {
     date = json['date'];
-    startTime = json['start-time'];
-    endTime = json['end-time'];
+    startTime = json['start_time'];
+    endTime = json['end_time'];
     day = json['day'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['date'] = this.date;
-    data['start-time'] = this.startTime;
-    data['end-time'] = this.endTime;
+    data['start_time'] = this.startTime;
+    data['end_time'] = this.endTime;
     data['day'] = this.day;
     return data;
   }

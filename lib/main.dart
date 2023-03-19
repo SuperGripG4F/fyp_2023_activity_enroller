@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       popGesture: false,
-      //home: RouteHelper.getInitial(), // it will go to '/'
-      initialRoute: RouteHelper.getLogin(),
+      //home: RouteHelper.getInitial), // it will go to '/'
+      initialRoute: RouteHelper.getAnnouncement(),
       getPages: RouteHelper.routes,
     );
   }

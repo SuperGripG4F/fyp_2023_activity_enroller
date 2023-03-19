@@ -2,13 +2,15 @@ import 'package:flutter/foundation.dart';
 import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/popular_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/activity/recommended_activity_detail.dart';
+import 'package:fyp_2023_activity_enroller/pages/announcement/announcements_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/login/login_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/login/welcome_page.dart';
 import 'package:get/get.dart';
 
 import '../pages/activity/popular_activity_detail.dart';
-import '../pages/home/enrty_point.dart';
+import '../pages/announcement/announcements_detail.dart';
+import '../widgets/enrty_point.dart';
 import '../pages/search/search_page.dart';
 
 class RouteHelper {
@@ -18,7 +20,7 @@ class RouteHelper {
   static const String recommendedActivity = "/recommended-activity";
   static const String popularActivity = "/popular-activity";
   static const String searchActivity = "/search-activity";
-  // static const String imgDetail = "/img-detail";
+  static const String announcement = "/announcement";
 
   static String getWelcome() => '$welcome';
 
@@ -33,6 +35,8 @@ class RouteHelper {
       '$recommendedActivity?pageId=$pageId';
 
   static String getSearchActivity() => '$searchActivity';
+
+  static String getAnnouncement() => '$announcement';
 
   // static String getimgDetail(int pageId) => '$imgDetail?pageId=$pageId';
 
@@ -54,6 +58,7 @@ class RouteHelper {
     GetPage(
         name: initial,
         page: () {
+          //return AnnouncementsDetailPage(activityId: 1);
           return MainActivityPage();
           //return const WelcomePage();
         },
@@ -87,6 +92,14 @@ class RouteHelper {
       name: searchActivity,
       page: () {
         return SearchPage();
+      },
+      fullscreenDialog: true,
+      transition: Transition.cupertinoDialog,
+    ),
+    GetPage(
+      name: announcement,
+      page: () {
+        return const AnnouncementsPage();
       },
       fullscreenDialog: true,
       transition: Transition.cupertinoDialog,

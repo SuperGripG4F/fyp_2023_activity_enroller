@@ -5,13 +5,13 @@ import 'package:fyp_2023_activity_enroller/utils/colors.dart';
 import 'package:get/get.dart';
 import 'package:rive/rive.dart';
 
-import '../../components/Animated_bar.dart';
-import '../../data/model/rive_asset.dart';
-import '../../routes/bottomNav_helper.dart';
-import '../../routes/route_helper.dart';
-import '../../utils/rive_utils.dart';
-import '../search/search_page.dart';
-import 'main_activity_page.dart';
+import '../components/Animated_bar.dart';
+import '../data/model/rive_asset.dart';
+import '../routes/bottomNav_helper.dart';
+import '../routes/route_helper.dart';
+import '../utils/rive_utils.dart';
+import '../pages/search/search_page.dart';
+import '../pages/home/main_activity_page.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
@@ -54,6 +54,11 @@ class _EntryPointState extends State<EntryPoint> {
                               print(Get.routing);
                             }
                             Get.offNamed(RouteHelper.getSearchActivity());
+                          } else if (bottomNavHelper.pageValue == 3) {
+                            if (kDebugMode) {
+                              print(Get.routing);
+                            }
+                            Get.offNamed(RouteHelper.getAnnouncement());
                           }
                         });
                       }
