@@ -1,6 +1,8 @@
+import 'package:fyp_2023_activity_enroller/data/controllers/joined_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/recommended_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/search_activity_controller.dart';
+import 'package:fyp_2023_activity_enroller/data/repository/joined_activity_repo.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/popular_activity_repo.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/recommend_activity_repo.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/search_activity_repo.dart';
@@ -20,12 +22,16 @@ Future<void> init() async {
   Get.lazyPut(() => PopularActivityRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedActivityRepo(apiClient: Get.find()));
   Get.lazyPut(() => SearchActivityRepo(apiClient: Get.find()));
+  Get.lazyPut(() => JoinedActivityRepo(apiClient: Get.find()));
 
   //controllers
   Get.lazyPut(() => PopularActivityController(popularActivityRepo: Get.find()));
   Get.lazyPut(
       () => RecommondedActivityController(recommendedActivityRepo: Get.find()));
   Get.lazyPut(() => SeacrhActivityController(searchActivityRepo: Get.find()));
+  Get.lazyPut(() => JoinedActivityController(joinedActivityRepo: Get.find()));
+
+  //login controllers
   Get.lazyPut(() => LoginController(apiClient: Get.find()));
 
   Get.put(BottomNavHelper());

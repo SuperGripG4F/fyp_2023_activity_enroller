@@ -8,7 +8,7 @@ class JoinedActivityRepo extends GetxService {
 
   JoinedActivityRepo({required this.apiClient});
 
-  Future<Response> getPopularActivityList() async {
-    return await apiClient.getData(AppConstants.POPULAR_ACTIVITY_URL);
+  Future<Response> getJoinedActivityList() async {
+    return await apiClient.getData(AppConstants.JOINED_ACTIVITY_URL);
   }
 }

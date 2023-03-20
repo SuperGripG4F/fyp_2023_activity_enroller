@@ -22,6 +22,8 @@ class RouteHelper {
   static const String searchActivity = "/search-activity";
   static const String announcement = "/announcement";
 
+  static const String announcementDetail = "/announcement-detail";
+
   static String getWelcome() => '$welcome';
 
   static String getLogin() => '$login';
@@ -37,6 +39,9 @@ class RouteHelper {
   static String getSearchActivity() => '$searchActivity';
 
   static String getAnnouncement() => '$announcement';
+
+  static String getAnnouncementDetail(int activityId) =>
+      '$announcementDetail?activityId=$activityId';
 
   // static String getimgDetail(int pageId) => '$imgDetail?pageId=$pageId';
 
@@ -60,7 +65,6 @@ class RouteHelper {
         page: () {
           //return AnnouncementsDetailPage(activityId: 1);
           return MainActivityPage();
-          //return const WelcomePage();
         },
         transition: Transition.cupertinoDialog,
         fullscreenDialog: true),
@@ -100,6 +104,17 @@ class RouteHelper {
       name: announcement,
       page: () {
         return const AnnouncementsPage();
+      },
+      fullscreenDialog: true,
+      transition: Transition.cupertinoDialog,
+    ),
+    GetPage(
+      name: announcementDetail,
+      page: () {
+        var activityId = Get.parameters['activityId'];
+        return AnnouncementsDetailPage(
+          activityId: int.parse(activityId!),
+        );
       },
       fullscreenDialog: true,
       transition: Transition.cupertinoDialog,

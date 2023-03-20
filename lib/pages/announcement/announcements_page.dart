@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:fyp_2023_activity_enroller/data/controllers/joined_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/recommended_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
@@ -38,10 +39,10 @@ class _AnnouncementsPage extends State<AnnouncementsPage> {
   @override
   void initState() {
     super.initState();
+
     pageController.addListener(() {
       setState(() {
         _currPageValue = pageController.page!; //not going to be null
-        //print("Current value is: " + _currPageValue.toString());
       });
     });
   }
@@ -52,7 +53,6 @@ class _AnnouncementsPage extends State<AnnouncementsPage> {
       body: Column(
         children: [
           const Header_info(),
-
           Container(
             margin: EdgeInsets.only(left: Dimensions.widhth20),
             child: Row(
@@ -66,21 +66,18 @@ class _AnnouncementsPage extends State<AnnouncementsPage> {
             ),
           ),
           //list of food and images section
-          GetBuilder<RecommondedActivityController>(
-              builder: (recommendedActivity) {
-            return recommendedActivity.isLoaded
+          GetBuilder<JoinedActivityController>(builder: (joinedActivity) {
+            return joinedActivity.isLoaded
                 ? ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount:
-                        recommendedActivity.recommendedActivityList.length,
+                    itemCount: joinedActivity.joinedActivityList.length,
                     itemBuilder: (context, index) {
                       ActivityModel activityModel =
-                          recommendedActivity.recommendedActivityList[index]!;
+                          joinedActivity.joinedActivityList[index]!;
                       return GestureDetector(
                         onTap: () {
-                          Get.toNamed(
-                              RouteHelper.getRecommandedActivity(index));
+                          Get.toNamed(RouteHelper.getAnnouncementDetail(index));
                         },
                         child: Container(
                           margin: EdgeInsets.only(
