@@ -30,8 +30,8 @@ class ActivityPageBody extends StatefulWidget {
 class _ActivityPageBody extends State<ActivityPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageValue = 0.0;
-  double _scaleFactor = 0.8;
-  double _height = Dimensions.pageViewContainer;
+  final double _scaleFactor = 0.8;
+  final double _height = Dimensions.pageViewContainer;
 
   @override
   void initState() {
@@ -39,19 +39,17 @@ class _ActivityPageBody extends State<ActivityPageBody> {
     pageController.addListener(() {
       setState(() {
         _currPageValue = pageController.page!; //not going to be null
-        //print("Current value is: " + _currPageValue.toString());
       });
     });
   }
 
-  // @override
-  // void dispose() {
-  //   pageController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
+    //get data from backend
+    setState(() {
+      Get.find<PopularActivityController>().getPopularActivityList();
+    });
+
     return Column(
       children: [
         //slider section
@@ -139,6 +137,10 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                   itemBuilder: (context, index) {
                     ActivityModel activityModel =
                         recommendedActivity.recommendedActivityList[index]!;
+                    print("img path:" +
+                        AppConstants.IMG_PATH +
+                        activityModel.poster!);
+
                     return GestureDetector(
                       onTap: () {
                         Get.toNamed(RouteHelper.getRecommandedActivity(index));

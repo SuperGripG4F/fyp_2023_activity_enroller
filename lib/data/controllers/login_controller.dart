@@ -1,39 +1,51 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
+import '../../routes/route_helper.dart';
 import '../../utils/app_constants.dart';
 import '../api/api_client.dart';
-import '../repository/popular_activity_repo.dart';
 
 class LoginController extends GetxController {
   final ApiClient apiClient;
-  //final PopularActivityRepo popularActivityRepo;
 
-  final email = ''.obs;
+  final username = ''.obs;
   final password = ''.obs;
   final errorMessage = ''.obs;
 
   LoginController({required this.apiClient});
 
-  bool _isLoaded = false;
-  bool get isLoaded => _isLoaded;
+  Future<bool> login() async {
+    print("login path:" + AppConstants.LOGIN);
 
-  Future<void> login() async {
-    // Response response = await apiClient.postData(
-    //     AppConstants.LOGIN, {'email': email.value, 'password': password.value});
-
-    final response = await apiClient.postData(
-        AppConstants.LOGIN, {'email': email.value, 'password': password.value});
+    final response = await apiClient.postData(AppConstants.LOGIN,
+        {'username': username.value, 'password': password.value});
     if (response.statusCode == 200) {
       if (kDebugMode) {
         print("login success");
+        Map<String, dynamic> user = response.body;
+        print(user['token']);
+        AppConstants.storeToken(user['token']);
       }
-      // todo
-
-      _isLoaded = true;
-      update();
+      return true;
     } else {
       //failed return
+      return false;
+    }
+  }
+
+  Future<bool> tokenLogin() async {
+    print("token login path:" + AppConstants.TOKEN_LOGIN);
+    final response = await apiClient.getData(AppConstants.TOKEN_LOGIN);
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("login success");
+        Get.offNamed(RouteHelper.getInitial());
+      }
+      return true;
+    } else {
+      //failed return
+      print("login fail: ${response.statusCode}");
+      return false;
     }
   }
 }

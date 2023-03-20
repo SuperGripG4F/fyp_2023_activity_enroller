@@ -24,7 +24,7 @@ class PopularActivityController extends GetxController {
       }
       _popularActivityList = [];
       _popularActivityList.addAll(Activity.fromJson(response.body).activities);
-      //print(_popularActivityList[0].titleEn);
+      print(_popularActivityList[0].titleEn);
       _isLoaded = true;
       update();
     } else {

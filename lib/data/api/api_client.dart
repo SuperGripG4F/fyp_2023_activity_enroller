@@ -10,36 +10,49 @@ class ApiClient extends GetConnect implements GetxService {
   //server url
   final String appBaseUrl;
 
-  final _connect = GetConnect();
-
   //storing data
   late Map<String, String> _mainHeaders;
 
   ApiClient({required this.appBaseUrl}) {
     baseUrl = appBaseUrl;
     //trying lifetime
-    token = AppConstants.TOKEN;
-    timeout = Duration(seconds: 30);
-    _mainHeaders = {
-      'Content-type': 'application/json; charset=UTF-8',
-      //Bearer is used for Authorization
-      'Authorization': 'Bearer $token',
-    };
+    AppConstants.retrieveToken().then((value) {
+      print("token is $value");
+      token = value;
+      timeout = Duration(seconds: 30);
+      _mainHeaders = {
+        'Content-type': 'application/json; charset=UTF-8',
+        //Bearer is used for Authorization
+        //'Authorization': 'Bearer $token',
+        'Authorization': token,
+      };
 
-    // userAgent = 'getx-client';
-    // timeout = const Duration(seconds: 5);
-    // followRedirects = true;
-    // maxRedirects = 5;
-    // sendUserAgent = false;
-    // maxAuthRetries = 1;
-    // allowAutoSignedCert = false;
-    // withCredentials = false;
+      userAgent = 'getx-client';
+      timeout = const Duration(seconds: 5);
+      followRedirects = true;
+      maxRedirects = 5;
+      sendUserAgent = false;
+      maxAuthRetries = 1;
+      allowAutoSignedCert = false;
+      withCredentials = false;
+    });
   }
 
   Future<Response> getData(String uri) async {
     //uri only need endpoint
     try {
-      Response response = await get(uri);
+      Response response = await get(uri, headers: _mainHeaders);
+      return response;
+    } catch (e) {
+      return Response(statusCode: 1, statusText: e.toString());
+    }
+  }
+
+  Future<Response> getDataQuery(String uri, Map<String, String>? headres,
+      Map<String, dynamic>? query) async {
+    //uri only need endpoint
+    try {
+      Response response = await get(uri, headers: headres, query: query);
       return response;
     } catch (e) {
       return Response(statusCode: 1, statusText: e.toString());

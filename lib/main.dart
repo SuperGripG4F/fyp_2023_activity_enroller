@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //for test !!!!
-    Get.find<PopularActivityController>().getPopularActivityList();
-    Get.find<RecommondedActivityController>().getRecommendedActivityList();
-    Get.find<SeacrhActivityController>().getActivityList();
-    Get.find<JoinedActivityController>().getJoinedActivityList();
+    //Get.find<PopularActivityController>().getPopularActivityList();
+    // Get.find<RecommondedActivityController>().getRecommendedActivityList();
+    // Get.find<SeacrhActivityController>().getActivityList();
+    // Get.find<JoinedActivityController>().getJoinedActivityList();
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       popGesture: false,
       //home: RouteHelper.getInitial), // it will go to '/'
-      initialRoute: RouteHelper.getInitial(),
+      initialRoute: RouteHelper.getLogin(),
       getPages: RouteHelper.routes,
     );
   }
