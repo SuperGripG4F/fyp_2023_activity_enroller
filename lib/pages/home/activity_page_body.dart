@@ -46,10 +46,6 @@ class _ActivityPageBody extends State<ActivityPageBody> {
   @override
   Widget build(BuildContext context) {
     //get data from backend
-    setState(() {
-      Get.find<PopularActivityController>().getPopularActivityList();
-    });
-
     return Column(
       children: [
         //slider section

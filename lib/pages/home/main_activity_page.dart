@@ -3,7 +3,9 @@ import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/activity_page_body.dart';
 import 'package:fyp_2023_activity_enroller/widgets/enrty_point.dart';
 import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
+import 'package:get/get.dart';
 
+import '../../data/controllers/popular_activity_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/big_text.dart';
@@ -35,6 +37,8 @@ class _MainActivityPageState extends State<MainActivityPage>
         parent: _animationController, curve: Curves.fastOutSlowIn));
     animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
         parent: _animationController, curve: Curves.fastOutSlowIn));
+
+    Get.find<PopularActivityController>().getPopularActivityList();
     super.initState();
   }
 
@@ -71,8 +75,8 @@ class _MainActivityPageState extends State<MainActivityPage>
                             color: AppColors.mainColor1,
                           ),
                           Row(
-                            children: [
-                              const SmallText(
+                            children: const [
+                              SmallText(
                                 text: AppConstants.APP_VERSION,
                                 color: Colors.black54,
                               ),

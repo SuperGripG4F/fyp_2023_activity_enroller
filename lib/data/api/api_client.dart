@@ -24,7 +24,7 @@ class ApiClient extends GetConnect implements GetxService {
         'Content-type': 'application/json; charset=UTF-8',
         //Bearer is used for Authorization
         //'Authorization': 'Bearer $token',
-        'Authorization': token,
+        'Authorization': "Token $token",
       };
 
       userAgent = 'getx-client';

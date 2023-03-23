@@ -55,7 +55,6 @@ class _MyWidgetState extends State<SideMenu> {
                       Future.delayed(Duration(seconds: 1), () {
                         menu.input!.change(false);
                       });
-
                       setState(() {
                         selectedMenu = menu;
                       });

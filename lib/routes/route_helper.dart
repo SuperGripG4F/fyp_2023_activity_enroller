@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../pages/activity/popular_activity_detail.dart';
 import '../pages/announcement/announcements_detail.dart';
+import '../pages/user/user_page.dart';
 import '../widgets/enrty_point.dart';
 import '../pages/search/search_page.dart';
 
@@ -21,8 +22,8 @@ class RouteHelper {
   static const String popularActivity = "/popular-activity";
   static const String searchActivity = "/search-activity";
   static const String announcement = "/announcement";
-
   static const String announcementDetail = "/announcement-detail";
+  static const String userProfile = "/user-profile";
 
   static String getWelcome() => '$welcome';
 
@@ -43,6 +44,8 @@ class RouteHelper {
   static String getAnnouncementDetail(int activityId) =>
       '$announcementDetail?activityId=$activityId';
 
+  static String getUserProfile() => '$userProfile';
+
   // static String getimgDetail(int pageId) => '$imgDetail?pageId=$pageId';
 
   static List<GetPage> routes = [
@@ -57,13 +60,13 @@ class RouteHelper {
         name: login,
         page: () {
           return LoginPage();
+          // return UserPage();
         },
         transition: Transition.cupertinoDialog,
         fullscreenDialog: true),
     GetPage(
         name: initial,
         page: () {
-          //return AnnouncementsDetailPage(activityId: 1);
           return MainActivityPage();
         },
         transition: Transition.cupertinoDialog,
@@ -73,7 +76,7 @@ class RouteHelper {
         page: () {
           var pageId = Get.parameters['pageId'];
           if (kDebugMode) {
-            print("pageId " + pageId! + " clicked");
+            print("pageId ${pageId!} clicked");
           }
           return PopularActivityDetail(
             pageId: int.parse(pageId!),
@@ -85,7 +88,7 @@ class RouteHelper {
         page: () {
           var pageId = Get.parameters['pageId'];
           if (kDebugMode) {
-            print("pageId " + pageId! + " clicked");
+            print("pageId ${pageId!} clicked");
           }
           return RecommendedActivityDetail(
             pageId: int.parse(pageId!),
@@ -115,6 +118,14 @@ class RouteHelper {
         return AnnouncementsDetailPage(
           activityId: int.parse(activityId!),
         );
+      },
+      fullscreenDialog: true,
+      transition: Transition.cupertinoDialog,
+    ),
+    GetPage(
+      name: userProfile,
+      page: () {
+        return const UserPage();
       },
       fullscreenDialog: true,
       transition: Transition.cupertinoDialog,

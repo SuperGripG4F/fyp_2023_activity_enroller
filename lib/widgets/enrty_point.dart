@@ -59,6 +59,11 @@ class _EntryPointState extends State<EntryPoint> {
                               print(Get.routing);
                             }
                             Get.toNamed(RouteHelper.getAnnouncement());
+                          } else if (bottomNavHelper.pageValue == 4) {
+                            if (kDebugMode) {
+                              print(Get.routing);
+                            }
+                            Get.toNamed(RouteHelper.getUserProfile());
                           }
                         });
                       }

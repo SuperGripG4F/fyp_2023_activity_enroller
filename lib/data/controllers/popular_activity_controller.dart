@@ -20,7 +20,7 @@ class PopularActivityController extends GetxController {
     Response response = await popularActivityRepo.getPopularActivityList();
     if (response.statusCode == 200) {
       if (kDebugMode) {
-        print("got activity");
+        print("got popular activity list");
       }
       _popularActivityList = [];
       _popularActivityList.addAll(Activity.fromJson(response.body).activities);

@@ -2,6 +2,7 @@ import 'package:fyp_2023_activity_enroller/data/controllers/joined_activity_cont
 import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/recommended_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/search_activity_controller.dart';
+import 'package:fyp_2023_activity_enroller/data/controllers/user_info_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/joined_activity_repo.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/popular_activity_repo.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/recommend_activity_repo.dart';
@@ -33,6 +34,9 @@ Future<void> init() async {
 
   //login controllers
   Get.lazyPut(() => LoginController(apiClient: Get.find()));
+
+  //userinfo controllers
+  Get.lazyPut(() => UserInfoController(apiClient: Get.find()));
 
   Get.put(BottomNavHelper());
   Get.put(RouteObserver());

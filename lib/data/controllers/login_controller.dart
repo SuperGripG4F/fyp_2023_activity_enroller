@@ -16,7 +16,6 @@ class LoginController extends GetxController {
 
   Future<bool> login() async {
     print("login path:" + AppConstants.LOGIN);
-
     final response = await apiClient.postData(AppConstants.LOGIN,
         {'username': username.value, 'password': password.value});
     if (response.statusCode == 200) {
@@ -34,7 +33,9 @@ class LoginController extends GetxController {
   }
 
   Future<bool> tokenLogin() async {
-    print("token login path:" + AppConstants.TOKEN_LOGIN);
+    // print("token login path:" + AppConstants.TOKEN_LOGIN);
+    final token = await AppConstants.retrieveToken();
+
     final response = await apiClient.getData(AppConstants.TOKEN_LOGIN);
     if (response.statusCode == 200) {
       if (kDebugMode) {
@@ -45,6 +46,7 @@ class LoginController extends GetxController {
     } else {
       //failed return
       print("login fail: ${response.statusCode}");
+      // tokenLogin();
       return false;
     }
   }

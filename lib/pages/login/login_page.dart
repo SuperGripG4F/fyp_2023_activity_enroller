@@ -21,7 +21,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    //_checkToken();
+    tokenLogin();
+  }
+
+  Future<void> tokenLogin() async {
+    // use the retrieved token to perform the login
+    Get.find<LoginController>().tokenLogin();
   }
 
   void _handleButtonPress() async {
@@ -59,11 +64,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     //auto login
     // Retrieve token from shared preferences
-
-    AppConstants.retrieveToken().then((value) {
-      Get.find<LoginController>().tokenLogin();
-    });
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(35.0),
