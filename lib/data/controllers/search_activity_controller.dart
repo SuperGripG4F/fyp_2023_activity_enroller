@@ -11,21 +11,42 @@ class SeacrhActivityController extends GetxController {
   List<dynamic> _ActivityList = [];
   List<dynamic> get ActivityList => _ActivityList;
 
+  ActivityModel _activityModel = ActivityModel();
+  ActivityModel get activityModel => _activityModel;
+
+  bool _isModeldetailLoaded = false;
+  bool get isModeldetailLoaded => _isModeldetailLoaded;
+
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
   Future<void> getActivityList() async {
     if (kDebugMode) {
-      print("getting activity....");
+      print("getting activities....");
     }
     Response response = await searchActivityRepo.getActivityList();
     if (response.statusCode == 200) {
-      print("got all activity");
+      print("got all activities");
       _ActivityList = [];
       _ActivityList.addAll(Activity.fromJson(response.body).activities);
       //print(_ActivityList[0].desc);
       _isLoaded = true;
       update();
+    } else {}
+  }
+
+  Future<void> getActivityDetail(activityid) async {
+    if (kDebugMode) {
+      print("getting activity....");
+    }
+    Response response = await searchActivityRepo.getActivityDetail(activityid);
+    if (response.statusCode == 200) {
+      print("got activity");
+      _activityModel = ActivityModel.fromJson(response.body);
+      _isModeldetailLoaded = true;
+      print(_activityModel.poster);
+      update();
+      return;
     } else {}
   }
 

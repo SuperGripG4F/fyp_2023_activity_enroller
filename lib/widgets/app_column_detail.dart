@@ -27,14 +27,6 @@ class AppColumnDetail extends StatelessWidget {
   const AppColumnDetail({
     super.key,
     required this.activityModel,
-    // required this.text,
-    // required this.stars,
-    // required this.comments_num,
-    // required this.date,
-    // required this.day,
-    // required this.time,
-    // required this.location,
-    //required this.pageId
   });
 
   @override

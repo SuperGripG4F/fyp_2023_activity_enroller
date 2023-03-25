@@ -20,6 +20,8 @@ class AppConstants {
   static const String RECOMMENDED_ACTIVITY_URL =
       "$API_VERSION/activities/recommended";
   static const String SEARCH_ACTIVITY_URL = "$API_VERSION/activities/search";
+  static const String SEARCH_ACTIVITY_DETAIL_URL =
+      "$SEARCH_ACTIVITY_URL/detail";
   static const String JOIN_ACTIVITY_URL = "$API_VERSION/activities/join";
   static const String JOINED_ACTIVITY_URL = "$API_VERSION/activities/joined";
   static const String ANNOUNCEMENT_URL =

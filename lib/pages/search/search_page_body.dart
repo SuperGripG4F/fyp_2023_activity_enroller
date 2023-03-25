@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -8,6 +9,7 @@ import 'package:outline_search_bar/outline_search_bar.dart';
 import '../../data/controllers/recommended_activity_controller.dart';
 import '../../data/controllers/search_activity_controller.dart';
 import '../../data/model/activity_model.dart';
+import '../../routes/route_helper.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
@@ -32,6 +34,7 @@ class _SearchPageBodyState extends State<SearchPageBody> {
   @override
   void initState() {
     super.initState();
+    Get.find<SeacrhActivityController>().getActivityList();
     pageController.addListener(() {
       setState(() {
         _currPageValue = pageController.page!; //not going to be null
@@ -60,13 +63,17 @@ class _SearchPageBodyState extends State<SearchPageBody> {
         GetBuilder<SeacrhActivityController>(builder: (searchActivity) {
           if (searchActivity.isLoaded) {
             List allActivity = searchActivity.ActivityList;
-            print("search term:" + _searchTerm);
+            if (kDebugMode) {
+              print("search term:" + _searchTerm);
+            }
             List filteredActivity = allActivity
                 .where((allActivity) => allActivity.titleEn
                     .toLowerCase()
                     .contains(_searchTerm.toLowerCase()))
                 .toList();
-            print("filteredActivity :" + filteredActivity.length.toString());
+            if (kDebugMode) {
+              print("filteredActivity :" + filteredActivity.length.toString());
+            }
 
             return filteredActivity.length == allActivity.length
                 ? Container()
@@ -78,7 +85,8 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                       ActivityModel activityModel = filteredActivity[index]!;
                       return GestureDetector(
                         onTap: () {
-                          //Get.toNamed(RouteHelper.getRecommendedFood());
+                          Get.toNamed(RouteHelper.getSearchActivityDetail(
+                              activityModel.id!));
                         },
                         child: Container(
                           margin: EdgeInsets.only(

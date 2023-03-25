@@ -1,183 +1,261 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get.dart';
+import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
 
+import 'package:get/get.dart';
+import 'package:native_dialog/native_dialog.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
+
+import '../../data/controllers/search_activity_controller.dart';
+import '../../data/model/activity_model.dart';
+import '../../routes/route_helper.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/app_column.dart';
+import '../../widgets/app_column_detail.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/big_text.dart';
 import '../../widgets/expandable_text_widget.dart';
-import '../../widgets/icon_and_text_widget.dart';
-import '../../widgets/small_text.dart';
 
-class ActivityDetail extends StatelessWidget {
-  int pageId;
-  ActivityDetail({Key? key, required this.pageId}) : super(key: key);
+class ActivityDetail extends StatefulWidget {
+  String activityId;
+
+  ActivityDetail({Key? key, required this.activityId}) : super(key: key);
+
+  @override
+  State<ActivityDetail> createState() => _ActivityDetailState();
+}
+
+class _ActivityDetailState extends State<ActivityDetail> {
+  @override
+  void initState() {
+    super.initState();
+    Get.find<SeacrhActivityController>().getActivityDetail(widget.activityId);
+
+    // activityModel = Get.find<SeacrhActivityController>().activityModel;
+  }
 
   @override
   Widget build(BuildContext context) {
-    //var product = Get.find<PopularProductController>().popularProductList[pageId];
-    //print("page is id " + pageId.toString());
-    //print("product name is " + product.name.toString());
+    // print(Get.find<SeacrhActivityController>().isModeldetailLoaded);
+    // print(Get.find<SeacrhActivityController>().activityModel.titleEn);
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          //background img
-          Positioned(
-              left: 0,
-              right: 0,
-              child: Container(
-                width: double.maxFinite,
-                height: Dimensions.popularFoodImgSize,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/image/act1.png"),
-                  //image: NetworkImage(product.img),
-                )),
-              )),
-          //icon widgets
-          Positioned(
-              top: Dimensions.height45,
-              left: Dimensions.widhth20,
-              right: Dimensions.widhth20,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        //Get.toNamed(RouteHelper.initial);
-                      },
-                      child: AppIcon(icon: Icons.arrow_back_ios)),
-                  AppIcon(icon: Icons.shopping_cart_outlined)
-                ],
-              )),
-          //introduction of food
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            top: Dimensions.popularFoodImgSize - Dimensions.height20,
-            child: Container(
-                padding: EdgeInsets.only(
-                  left: Dimensions.widhth20,
-                  right: Dimensions.widhth20,
-                  top: Dimensions.height20,
-                ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(Dimensions.radius20),
-                        topRight: Radius.circular(Dimensions.radius20)),
-                    color: Colors.white),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return GetBuilder<SeacrhActivityController>(builder: (searchActivity) {
+      if (searchActivity.isModeldetailLoaded) {
+        ActivityModel activityModel = searchActivity.activityModel;
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                toolbarHeight: 80,
+                collapsedHeight: 100,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    AppColumn(
-                      //ext: product.name,
-                      text: '招募音樂人/Band 隊!!!',
-                      stars: 5,
-                      comments_num: 1200,
-                      date: "5-2-2023",
-                      day: "Mon",
-                      time: "14:00",
-                      location: "循道衛理中心愛秩序灣",
+                    GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: AppIcon(icon: Icons.clear)),
+                  ],
+                ),
+                bottom: PreferredSize(
+                    preferredSize: const Size.fromHeight(20),
+                    child: Container(
+                      width: double.maxFinite,
+                      padding: const EdgeInsets.only(top: 5, bottom: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(Dimensions.radius20),
+                              topRight: Radius.circular(Dimensions.radius20))),
+                      child: Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              top: 10, right: 30, left: 30),
+                          width: 60,
+                          height: 5,
+                          decoration: BoxDecoration(
+                              color: AppColors.mainColor1,
+                              borderRadius: BorderRadius.circular(50)),
+                        ),
+                      ),
+                    )),
+                expandedHeight: 300,
+                backgroundColor: AppColors.mainColor1,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return DetailScreen(activityModel: activityModel);
+                      }));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            AppConstants.IMG_PATH + activityModel.poster!),
+                      )),
                     ),
-                    SizedBox(
-                      height: Dimensions.height20,
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                  child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                        right: Dimensions.widhth20, left: Dimensions.widhth20),
+                    child: AppColumnDetail(
+                      activityModel: activityModel,
                     ),
-                    BigText(text: "Detail"),
-                    SizedBox(
-                      height: Dimensions.height20,
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: ExpandableTextWidget(
-                          //text: product.description
-                          text: "Re-Union Band Show 招募音樂人/Band 隊!!!" +
-                              "\n各位音樂人Band友!! 三年時間無同大家相聚!!" +
-                              "\n黎緊5/2/2023 將會有2023年首個 Band Show! 大家一齊黎聚一聚! " +
-                              "\n日期: 5/2/2023(星期日)" +
-                              "\n採排時間: 早上10:00-12:00 (報名後通知)" +
-                              "\n表演時間: 下午2:00-5:00" +
-                              "\n表演隊伍: 8隊!" +
-                              "\n每個表演單位 2-3首歌!" +
-                              "\n截止報名日期: 30/1/2023!" +
-                              "\n名額有限, 先到先得!",
+                  ),
+                ],
+              ))
+            ],
+          ),
+          bottomNavigationBar: Container(
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Container(
+                height: Dimensions.height120,
+                padding: EdgeInsets.only(
+                    top: Dimensions.height30,
+                    bottom: Dimensions.height30,
+                    left: Dimensions.widhth20,
+                    right: Dimensions.widhth20),
+                decoration: BoxDecoration(
+                    color: AppColors.buttionbackgroundColor,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(
+                          Dimensions.radius20 * 2,
+                        ),
+                        topRight: Radius.circular(Dimensions.radius20 * 2))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    //love icon
+                    Container(
+                        // padding: EdgeInsets.only(
+                        //     top: Dimensions.height20,
+                        //     bottom: Dimensions.height20,
+                        //     left: Dimensions.widhth20,
+                        //     right: Dimensions.widhth20),
+                        // decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(Dimensions.radius20),
+                        //     color: Colors.white),
+                        // child: Icon(
+                        //   Icons.favorite,
+                        //   color: AppColors.mainColor1,
+                        // ),
+                        ),
+                    GestureDetector(
+                      onTap: () async {
+                        QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.confirm,
+                            text:
+                                "Are you confirm to participate ${activityModel.titleEn}?",
+                            confirmBtnText: 'Yes',
+                            cancelBtnText: 'No',
+                            confirmBtnColor: AppColors.mainColor5,
+                            onConfirmBtnTap: () async {
+                              if (kDebugMode) {
+                                print("confirm");
+                              }
+                              Navigator.of(context, rootNavigator: true).pop();
+                              QuickAlert.show(
+                                context: context,
+                                type: QuickAlertType.loading,
+                                title: 'Loading',
+                              );
+                              final statuscode =
+                                  await Get.find<PopularActivityController>()
+                                      .joinActivity(activityModel.id);
+                              Navigator.of(context, rootNavigator: true).pop();
+
+                              print("statuscode: $statuscode");
+                              if (statuscode == 302) {
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.warning,
+                                  text: 'Already participated',
+                                  confirmBtnColor: AppColors.mainColor5,
+                                );
+                              } else if (statuscode == 201) {
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.success,
+                                  text: 'participate successful',
+                                  confirmBtnColor: AppColors.mainColor5,
+                                );
+                              } else {
+                                QuickAlert.show(
+                                    context: context,
+                                    type: QuickAlertType.error,
+                                    confirmBtnColor: AppColors.mainColor5);
+                              }
+                            });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            top: Dimensions.height20,
+                            bottom: Dimensions.height20,
+                            left: Dimensions.widhth20,
+                            right: Dimensions.widhth20),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius20),
+                            color: AppColors.mainColor1),
+                        child: BigText(
+                          text: "Join Now",
+                          color: Colors.white,
                         ),
                       ),
                     )
                   ],
-                )),
-          )
-          //expandable text
-        ],
-      ),
-      bottomNavigationBar: Container(
-        height: Dimensions.height120,
-        padding: EdgeInsets.only(
-            top: Dimensions.height30,
-            bottom: Dimensions.height30,
-            left: Dimensions.widhth20,
-            right: Dimensions.widhth20),
-        decoration: BoxDecoration(
-            color: AppColors.buttionbackgroundColor,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(
-                  Dimensions.radius20 * 2,
                 ),
-                topRight: Radius.circular(Dimensions.radius20 * 2))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.only(
-                  top: Dimensions.height20,
-                  bottom: Dimensions.height20,
-                  left: Dimensions.widhth20,
-                  right: Dimensions.widhth20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius20),
-                  color: Colors.white),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.remove,
-                    color: AppColors.signColor,
-                  ),
-                  SizedBox(
-                    width: Dimensions.widhth10,
-                  ),
-                  BigText(text: "0"),
-                  SizedBox(
-                    width: Dimensions.widhth10,
-                  ),
-                  Icon(
-                    Icons.add,
-                    color: AppColors.signColor,
-                  ),
-                ],
               ),
-            ),
-            Container(
-              padding: EdgeInsets.only(
-                  top: Dimensions.height20,
-                  bottom: Dimensions.height20,
-                  left: Dimensions.widhth20,
-                  right: Dimensions.widhth20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius20),
-                  color: AppColors.mainColor1),
-              child: BigText(
-                text: "\$10 | Add to cart",
-                color: Colors.white,
-              ),
-            )
-          ],
+            ]),
+          ),
+        );
+      } else {
+        return Scaffold();
+      }
+    });
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  var activityModel;
+
+  DetailScreen({Key? key, required this.activityModel}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        child: Container(
+          color: AppColors.mainColor1,
+          child: Center(
+            child: Image(
+                image: NetworkImage(
+                    AppConstants.IMG_PATH + activityModel.poster!)),
+          ),
         ),
+        onTap: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }

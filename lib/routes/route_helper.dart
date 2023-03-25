@@ -8,6 +8,8 @@ import 'package:fyp_2023_activity_enroller/pages/login/login_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/login/welcome_page.dart';
 import 'package:get/get.dart';
 
+import '../data/model/activity_model.dart';
+import '../pages/activity/activity_detail.dart';
 import '../pages/activity/popular_activity_detail.dart';
 import '../pages/announcement/announcements_detail.dart';
 import '../pages/user/user_page.dart';
@@ -18,9 +20,14 @@ class RouteHelper {
   static const String welcome = "/welcome";
   static const String login = "/login";
   static const String initial = "/home";
+  //to detail page
   static const String recommendedActivity = "/recommended-activity";
   static const String popularActivity = "/popular-activity";
+
+  //this is home page not detail page
   static const String searchActivity = "/search-activity";
+  static const String searchActivityDetail = "/search-activity-detail";
+
   static const String announcement = "/announcement";
   static const String announcementDetail = "/announcement-detail";
   static const String userProfile = "/user-profile";
@@ -37,6 +44,9 @@ class RouteHelper {
   static String getRecommandedActivity(int pageId) =>
       '$recommendedActivity?pageId=$pageId';
 
+  static String getSearchActivityDetail(int activityId) =>
+      '$searchActivityDetail?activityId=$activityId';
+
   static String getSearchActivity() => '$searchActivity';
 
   static String getAnnouncement() => '$announcement';
@@ -45,8 +55,6 @@ class RouteHelper {
       '$announcementDetail?activityId=$activityId';
 
   static String getUserProfile() => '$userProfile';
-
-  // static String getimgDetail(int pageId) => '$imgDetail?pageId=$pageId';
 
   static List<GetPage> routes = [
     GetPage(
@@ -60,7 +68,6 @@ class RouteHelper {
         name: login,
         page: () {
           return LoginPage();
-          // return UserPage();
         },
         transition: Transition.cupertinoDialog,
         fullscreenDialog: true),
@@ -98,10 +105,19 @@ class RouteHelper {
     GetPage(
       name: searchActivity,
       page: () {
-        return SearchPage();
+        return const SearchPage();
       },
       fullscreenDialog: true,
       transition: Transition.cupertinoDialog,
+    ),
+    GetPage(
+      name: searchActivityDetail,
+      page: () {
+        final activityId = Get.parameters['activityId'];
+        print("activityId: $activityId");
+        return ActivityDetail(activityId: activityId!);
+      },
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: announcement,

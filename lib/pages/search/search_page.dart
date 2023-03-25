@@ -21,10 +21,10 @@ class SearchPage extends StatelessWidget {
         body: Stack(
           children: [
             Column(
-              children: [
+              children: const [
                 //showing the header
-                const Header_info(),
-                const Expanded(
+                Header_info(),
+                Expanded(
                     child: SingleChildScrollView(
                   child: SearchPageBody(),
                 )),

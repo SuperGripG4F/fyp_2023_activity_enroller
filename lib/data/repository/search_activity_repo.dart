@@ -11,4 +11,9 @@ class SearchActivityRepo extends GetxService {
   Future<Response> getActivityList() async {
     return await apiClient.getData(AppConstants.SEARCH_ACTIVITY_URL);
   }
+
+  Future<Response> getActivityDetail(activityid) async {
+    return await apiClient.getDataQuery(
+        AppConstants.SEARCH_ACTIVITY_DETAIL_URL, {"activityid": activityid});
+  }
 }

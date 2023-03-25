@@ -142,20 +142,6 @@ class PopularActivityDetail extends StatelessWidget {
                     ),
                 GestureDetector(
                   onTap: () async {
-                    // try {
-                    //   final confirmed = await NativeDialog.confirm(
-                    //       "Are you confirm to participate ${activityModel.titleEn}?");
-                    //   print(confirmed);
-                    //   if (confirmed) {
-                    //     final statuscode =
-                    //         await Get.find<PopularActivityController>()
-                    //             .joinActivity(activityModel.id);
-                    //   }
-                    // } on PlatformException catch (error) {
-                    //   if (kDebugMode) {
-                    //     print(error.message);
-                    //   }
-                    // }
                     QuickAlert.show(
                         context: context,
                         type: QuickAlertType.confirm,
