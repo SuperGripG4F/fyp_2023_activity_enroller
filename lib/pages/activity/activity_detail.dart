@@ -12,6 +12,7 @@ import 'package:native_dialog/native_dialog.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
+import '../../data/controllers/activity_detail.controller.dart';
 import '../../data/controllers/search_activity_controller.dart';
 import '../../data/model/activity_model.dart';
 import '../../routes/route_helper.dart';
@@ -37,19 +38,15 @@ class _ActivityDetailState extends State<ActivityDetail> {
   @override
   void initState() {
     super.initState();
-    Get.find<SeacrhActivityController>().getActivityDetail(widget.activityId);
-
-    // activityModel = Get.find<SeacrhActivityController>().activityModel;
+    Get.lazyPut(() => ActivityDetailController(activityDetailRepo: Get.find()));
+    Get.find<ActivityDetailController>().getActivityDetail(widget.activityId);
   }
 
   @override
   Widget build(BuildContext context) {
-    // print(Get.find<SeacrhActivityController>().isModeldetailLoaded);
-    // print(Get.find<SeacrhActivityController>().activityModel.titleEn);
-
-    return GetBuilder<SeacrhActivityController>(builder: (searchActivity) {
-      if (searchActivity.isModeldetailLoaded) {
-        ActivityModel activityModel = searchActivity.activityModel;
+    return GetBuilder<ActivityDetailController>(builder: (activityDetail) {
+      if (activityDetail.isLoaded) {
+        ActivityModel activityModel = activityDetail.activityModel;
         return Scaffold(
           backgroundColor: Colors.white,
           body: CustomScrollView(
@@ -180,7 +177,7 @@ class _ActivityDetailState extends State<ActivityDetail> {
                                 title: 'Loading',
                               );
                               final statuscode =
-                                  await Get.find<PopularActivityController>()
+                                  await Get.find<ActivityDetailController>()
                                       .joinActivity(activityModel.id);
                               Navigator.of(context, rootNavigator: true).pop();
 

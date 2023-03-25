@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
-import 'package:fyp_2023_activity_enroller/pages/activity/popular_activity_detail.dart';
-import 'package:fyp_2023_activity_enroller/pages/activity/recommended_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/announcement/announcements_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/login/login_page.dart';
@@ -10,7 +8,6 @@ import 'package:get/get.dart';
 
 import '../data/model/activity_model.dart';
 import '../pages/activity/activity_detail.dart';
-import '../pages/activity/popular_activity_detail.dart';
 import '../pages/announcement/announcements_detail.dart';
 import '../pages/user/user_page.dart';
 import '../widgets/enrty_point.dart';
@@ -23,10 +20,9 @@ class RouteHelper {
   //to detail page
   static const String recommendedActivity = "/recommended-activity";
   static const String popularActivity = "/popular-activity";
-
-  //this is home page not detail page
   static const String searchActivity = "/search-activity";
-  static const String searchActivityDetail = "/search-activity-detail";
+
+  static const String activityDetail = "/activity-detail";
 
   static const String announcement = "/announcement";
   static const String announcementDetail = "/announcement-detail";
@@ -44,8 +40,8 @@ class RouteHelper {
   static String getRecommandedActivity(int pageId) =>
       '$recommendedActivity?pageId=$pageId';
 
-  static String getSearchActivityDetail(int activityId) =>
-      '$searchActivityDetail?activityId=$activityId';
+  static String getActivityDetail(int activityId) =>
+      '$activityDetail?activityId=$activityId';
 
   static String getSearchActivity() => '$searchActivity';
 
@@ -79,30 +75,6 @@ class RouteHelper {
         transition: Transition.cupertinoDialog,
         fullscreenDialog: true),
     GetPage(
-        name: popularActivity,
-        page: () {
-          var pageId = Get.parameters['pageId'];
-          if (kDebugMode) {
-            print("pageId ${pageId!} clicked");
-          }
-          return PopularActivityDetail(
-            pageId: int.parse(pageId!),
-          );
-        },
-        transition: Transition.rightToLeft),
-    GetPage(
-        name: recommendedActivity,
-        page: () {
-          var pageId = Get.parameters['pageId'];
-          if (kDebugMode) {
-            print("pageId ${pageId!} clicked");
-          }
-          return RecommendedActivityDetail(
-            pageId: int.parse(pageId!),
-          );
-        },
-        transition: Transition.rightToLeft),
-    GetPage(
       name: searchActivity,
       page: () {
         return const SearchPage();
@@ -111,7 +83,7 @@ class RouteHelper {
       transition: Transition.cupertinoDialog,
     ),
     GetPage(
-      name: searchActivityDetail,
+      name: activityDetail,
       page: () {
         final activityId = Get.parameters['activityId'];
         print("activityId: $activityId");

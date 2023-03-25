@@ -20,6 +20,7 @@ import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/app_column.dart';
 import '../../widgets/big_text.dart';
+import '../../widgets/cirular_progress.dart';
 import '../../widgets/icon_and_text_widget.dart';
 import '../../widgets/small_text.dart';
 
@@ -39,7 +40,6 @@ class _AnnouncementsPage extends State<AnnouncementsPage> {
   @override
   void initState() {
     super.initState();
-
     pageController.addListener(() {
       setState(() {
         _currPageValue = pageController.page!; //not going to be null
@@ -135,14 +135,7 @@ class _AnnouncementsPage extends State<AnnouncementsPage> {
                         ),
                       );
                     })
-                : Column(children: [
-                    SizedBox(
-                      height: Dimensions.height30,
-                    ),
-                    CircularProgressIndicator(
-                      color: AppColors.mainColor1,
-                    ),
-                  ]);
+                : CircularProgress();
           }),
         ],
       ),

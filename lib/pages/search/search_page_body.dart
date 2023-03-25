@@ -85,8 +85,8 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                       ActivityModel activityModel = filteredActivity[index]!;
                       return GestureDetector(
                         onTap: () {
-                          Get.toNamed(RouteHelper.getSearchActivityDetail(
-                              activityModel.id!));
+                          Get.toNamed(
+                              RouteHelper.getActivityDetail(activityModel.id!));
                         },
                         child: Container(
                           margin: EdgeInsets.only(

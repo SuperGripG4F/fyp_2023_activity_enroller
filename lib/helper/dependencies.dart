@@ -11,7 +11,9 @@ import 'package:fyp_2023_activity_enroller/routes/route_observer.dart';
 import 'package:get/get.dart';
 
 import '../data/api/api_client.dart';
+import '../data/controllers/activity_detail.controller.dart';
 import '../data/controllers/login_controller.dart';
+import '../data/repository/activity_detail.dart';
 import '../routes/bottomNav_helper.dart';
 import '../utils/app_constants.dart';
 
@@ -24,6 +26,7 @@ Future<void> init() async {
   Get.lazyPut(() => RecommendedActivityRepo(apiClient: Get.find()));
   Get.lazyPut(() => SearchActivityRepo(apiClient: Get.find()));
   Get.lazyPut(() => JoinedActivityRepo(apiClient: Get.find()));
+  Get.lazyPut(() => ActivityDetailRepo(apiClient: Get.find()));
 
   //controllers
   Get.lazyPut(() => PopularActivityController(popularActivityRepo: Get.find()));
@@ -31,10 +34,10 @@ Future<void> init() async {
       () => RecommondedActivityController(recommendedActivityRepo: Get.find()));
   Get.lazyPut(() => SeacrhActivityController(searchActivityRepo: Get.find()));
   Get.lazyPut(() => JoinedActivityController(joinedActivityRepo: Get.find()));
+  Get.lazyPut(() => ActivityDetailController(activityDetailRepo: Get.find()));
 
   //login controllers
   Get.lazyPut(() => LoginController(apiClient: Get.find()));
-
   //userinfo controllers
   Get.lazyPut(() => UserInfoController(apiClient: Get.find()));
 

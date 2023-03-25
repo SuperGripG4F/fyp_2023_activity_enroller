@@ -17,6 +17,7 @@ import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/app_column.dart';
 import '../../widgets/big_text.dart';
+import '../../widgets/cirular_progress.dart';
 import '../../widgets/icon_and_text_widget.dart';
 import '../../widgets/small_text.dart';
 
@@ -63,17 +64,9 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                             popularActivity.popularActivityList[position]);
                       }),
                 )
-              : Column(children: [
-                  SizedBox(
-                    height: Dimensions.height30,
-                  ),
-                  const CircularProgressIndicator(
-                    color: AppColors.mainColor1,
-                  ),
-                  SizedBox(
-                    height: Dimensions.height30,
-                  ),
-                ]);
+              : CircularProgress(
+                  height: Dimensions.height120,
+                );
         }),
         //dots
         GetBuilder<PopularActivityController>(builder: (popularActivity) {
@@ -139,7 +132,8 @@ class _ActivityPageBody extends State<ActivityPageBody> {
 
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecommandedActivity(index));
+                        Get.toNamed(
+                            RouteHelper.getActivityDetail(activityModel.id!));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -196,14 +190,7 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                       ),
                     );
                   })
-              : Column(children: [
-                  SizedBox(
-                    height: Dimensions.height30,
-                  ),
-                  CircularProgressIndicator(
-                    color: AppColors.mainColor1,
-                  ),
-                ]);
+              : CircularProgress();
         }),
       ],
     );
@@ -246,12 +233,7 @@ class _ActivityPageBody extends State<ActivityPageBody> {
       transform: matrix,
       child: GestureDetector(
         onTap: () {
-          if (kDebugMode) {
-            print(index.toString() +
-                " index clicked\nactivityModel.poster: " +
-                activityModel.poster!);
-          }
-          Get.toNamed(RouteHelper.getPopularActivity(index));
+          Get.toNamed(RouteHelper.getActivityDetail(activityModel.id!));
         },
         child: Stack(
           children: [
