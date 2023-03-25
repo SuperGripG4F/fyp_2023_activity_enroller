@@ -53,7 +53,7 @@ class _ActivityPageBody extends State<ActivityPageBody> {
         //popularProducts is the instance of controller
         GetBuilder<PopularActivityController>(builder: (popularActivity) {
           return popularActivity.isLoaded
-              ? Container(
+              ? SizedBox(
                   height: Dimensions.pageView,
                   child: PageView.builder(
                       controller: pageController,
@@ -67,7 +67,7 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                   SizedBox(
                     height: Dimensions.height30,
                   ),
-                  CircularProgressIndicator(
+                  const CircularProgressIndicator(
                     color: AppColors.mainColor1,
                   ),
                   SizedBox(
@@ -79,7 +79,7 @@ class _ActivityPageBody extends State<ActivityPageBody> {
         GetBuilder<PopularActivityController>(builder: (popularActivity) {
           return DotsIndicator(
             //solve the problems that, the dots length is 0 , when in first init.
-            dotsCount: popularActivity.popularActivityList.length <= 0
+            dotsCount: popularActivity.popularActivityList.isEmpty
                 ? 1
                 : popularActivity.popularActivityList.length,
             position: _currPageValue,

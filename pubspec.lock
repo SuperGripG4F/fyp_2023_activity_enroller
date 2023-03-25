@@ -184,6 +184,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
+  native_dialog:
+    dependency: "direct main"
+    description:
+      name: native_dialog
+      sha256: "1874888ef5ac30ee9816d987b66a7461df61080719b6eca190d6c050a35b2c6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   outline_search_bar:
     dependency: "direct main"
     description:
@@ -256,6 +264,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  quickalert:
+    dependency: "direct main"
+    description:
+      name: quickalert
+      sha256: "33a52870b2a87c55d0649d0cd228efaa2368d5df39231fdecebb71f349a9b221"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   rive:
     dependency: "direct main"
     description:

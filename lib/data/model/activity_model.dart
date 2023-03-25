@@ -43,6 +43,7 @@ class Activity {
 }
 
 class ActivityModel {
+  int? id;
   String? organization;
   String? titleEn;
   String? titleZh;
@@ -61,7 +62,8 @@ class ActivityModel {
   int? vacancy;
 
   ActivityModel(
-      {this.organization,
+      {this.id,
+      this.organization,
       this.titleEn,
       this.titleZh,
       this.slogan,
@@ -79,6 +81,7 @@ class ActivityModel {
       this.vacancy});
 
   ActivityModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     organization = json['organization'];
     titleEn = json['title_en'];
     titleZh = json['title_zh'];
@@ -104,6 +107,7 @@ class ActivityModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['organization'] = this.organization;
     data['title_en'] = this.titleEn;
     data['title_zh'] = this.titleZh;

@@ -1,5 +1,7 @@
 PODS:
   - Flutter (1.0.0)
+  - native_dialog (0.0.1):
+    - Flutter
   - rive_common (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -8,12 +10,15 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - native_dialog (from `.symlinks/plugins/native_dialog/ios`)
   - rive_common (from `.symlinks/plugins/rive_common/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  native_dialog:
+    :path: ".symlinks/plugins/native_dialog/ios"
   rive_common:
     :path: ".symlinks/plugins/rive_common/ios"
   shared_preferences_foundation:
@@ -21,6 +26,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  native_dialog: 7336e033dbf881f4b873bf8062c14edc402f7da2
   rive_common: e35144d3b86972f8760b6c9f8b120dfd5fadfa13
   shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
 

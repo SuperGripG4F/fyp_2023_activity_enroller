@@ -22,8 +22,6 @@ class ApiClient extends GetConnect implements GetxService {
       timeout = Duration(seconds: 30);
       _mainHeaders = {
         'Content-type': 'application/json; charset=UTF-8',
-        //Bearer is used for Authorization
-        //'Authorization': 'Bearer $token',
         'Authorization': "Token $token",
       };
 
@@ -48,11 +46,10 @@ class ApiClient extends GetConnect implements GetxService {
     }
   }
 
-  Future<Response> getDataQuery(String uri, Map<String, String>? headres,
-      Map<String, dynamic>? query) async {
+  Future<Response> getDataQuery(String uri, Map<String, dynamic>? query) async {
     //uri only need endpoint
     try {
-      Response response = await get(uri, headers: headres, query: query);
+      Response response = await get(uri, headers: _mainHeaders, query: query);
       return response;
     } catch (e) {
       return Response(statusCode: 1, statusText: e.toString());
@@ -64,6 +61,7 @@ class ApiClient extends GetConnect implements GetxService {
       Response response = await post(
         uri,
         body,
+        headers: _mainHeaders,
       );
       if (kDebugMode) {
         print("responseBygetx: " + response.statusCode.toString());

@@ -26,7 +26,13 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> tokenLogin() async {
     // use the retrieved token to perform the login
-    Get.find<LoginController>().tokenLogin();
+    bool isLoginSuccess = await Get.find<LoginController>().tokenLogin();
+    if (isLoginSuccess) {
+      // ignore: use_build_context_synchronously
+      // await alert(context, title: const Text('Login successful'));
+      //const SnackBar(content: Text('Login successful'));
+      Get.offNamed(RouteHelper.getInitial());
+    }
   }
 
   void _handleButtonPress() async {
@@ -46,12 +52,13 @@ class _LoginPageState extends State<LoginPage> {
           RouteHelper.getInitial(),
         );
       } else {
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Invalid email or password')),
         );
       }
     }
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 5));
 
     if (mounted) {
       setState(() {

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:fyp_2023_activity_enroller/data/api/api_client.dart';
 import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
 import 'package:fyp_2023_activity_enroller/data/repository/popular_activity_repo.dart';
 import 'package:get/get.dart';
@@ -29,6 +30,26 @@ class PopularActivityController extends GetxController {
       update();
     } else {
       //failed return
+    }
+  }
+
+  Future<int> joinActivity(activityId) async {
+    print("id:" + activityId.toString());
+    //api body is string {"activityid":"1"}
+    Response response =
+        await popularActivityRepo.postJoinActivity(activityId.toString());
+    if (response.statusCode == 201) {
+      if (kDebugMode) {
+        print("join activity success");
+      }
+      return response.statusCode!;
+    } else if (response.statusCode == 302) {
+      if (kDebugMode) {
+        print("already joined activity ");
+      }
+      return response.statusCode!;
+    } else {
+      return response.statusCode!;
     }
   }
 

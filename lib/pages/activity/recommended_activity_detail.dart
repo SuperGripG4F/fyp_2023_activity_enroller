@@ -93,13 +93,7 @@ class RecommendedActivityDetail extends StatelessWidget {
                 margin: EdgeInsets.only(
                     right: Dimensions.widhth20, left: Dimensions.widhth20),
                 child: AppColumnDetail(
-                  text: activityModel.titleEn,
-                  stars: activityModel.stars,
-                  comments_num: activityModel.comments,
-                  date: activityModel.dates[0].date,
-                  day: activityModel.dates[0].day,
-                  time: activityModel.dates[0].startTime,
-                  location: activityModel.location,
+                  activityModel: activityModel,
                 ),
               ),
             ],
@@ -127,19 +121,19 @@ class RecommendedActivityDetail extends StatelessWidget {
               children: [
                 //love icon
                 Container(
-                  padding: EdgeInsets.only(
-                      top: Dimensions.height20,
-                      bottom: Dimensions.height20,
-                      left: Dimensions.widhth20,
-                      right: Dimensions.widhth20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius20),
-                      color: Colors.white),
-                  child: const Icon(
-                    Icons.favorite,
-                    color: AppColors.mainColor1,
-                  ),
-                ),
+                    // padding: EdgeInsets.only(
+                    //     top: Dimensions.height20,
+                    //     bottom: Dimensions.height20,
+                    //     left: Dimensions.widhth20,
+                    //     right: Dimensions.widhth20),
+                    // decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    //     color: Colors.white),
+                    // child: const Icon(
+                    //   Icons.favorite,
+                    //   color: AppColors.mainColor1,
+                    // ),
+                    ),
                 Container(
                   padding: EdgeInsets.only(
                       top: Dimensions.height20,

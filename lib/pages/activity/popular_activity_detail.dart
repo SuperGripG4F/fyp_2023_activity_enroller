@@ -1,9 +1,16 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
 
 import 'package:get/get.dart';
+import 'package:native_dialog/native_dialog.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import '../../routes/route_helper.dart';
 import '../../utils/app_constants.dart';
@@ -92,13 +99,7 @@ class PopularActivityDetail extends StatelessWidget {
                 margin: EdgeInsets.only(
                     right: Dimensions.widhth20, left: Dimensions.widhth20),
                 child: AppColumnDetail(
-                  text: activityModel.titleEn,
-                  stars: activityModel.stars,
-                  comments_num: activityModel.comments,
-                  date: activityModel.dates[0].date,
-                  day: activityModel.dates[0].day,
-                  time: activityModel.dates[0].startTime,
-                  location: activityModel.location,
+                  activityModel: activityModel,
                 ),
               ),
             ],
@@ -126,31 +127,95 @@ class PopularActivityDetail extends StatelessWidget {
               children: [
                 //love icon
                 Container(
-                  padding: EdgeInsets.only(
-                      top: Dimensions.height20,
-                      bottom: Dimensions.height20,
-                      left: Dimensions.widhth20,
-                      right: Dimensions.widhth20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius20),
-                      color: Colors.white),
-                  child: Icon(
-                    Icons.favorite,
-                    color: AppColors.mainColor1,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                      top: Dimensions.height20,
-                      bottom: Dimensions.height20,
-                      left: Dimensions.widhth20,
-                      right: Dimensions.widhth20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius20),
-                      color: AppColors.mainColor1),
-                  child: BigText(
-                    text: "Join Now",
-                    color: Colors.white,
+                    // padding: EdgeInsets.only(
+                    //     top: Dimensions.height20,
+                    //     bottom: Dimensions.height20,
+                    //     left: Dimensions.widhth20,
+                    //     right: Dimensions.widhth20),
+                    // decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    //     color: Colors.white),
+                    // child: Icon(
+                    //   Icons.favorite,
+                    //   color: AppColors.mainColor1,
+                    // ),
+                    ),
+                GestureDetector(
+                  onTap: () async {
+                    // try {
+                    //   final confirmed = await NativeDialog.confirm(
+                    //       "Are you confirm to participate ${activityModel.titleEn}?");
+                    //   print(confirmed);
+                    //   if (confirmed) {
+                    //     final statuscode =
+                    //         await Get.find<PopularActivityController>()
+                    //             .joinActivity(activityModel.id);
+                    //   }
+                    // } on PlatformException catch (error) {
+                    //   if (kDebugMode) {
+                    //     print(error.message);
+                    //   }
+                    // }
+                    QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.confirm,
+                        text:
+                            "Are you confirm to participate ${activityModel.titleEn}?",
+                        confirmBtnText: 'Yes',
+                        cancelBtnText: 'No',
+                        confirmBtnColor: AppColors.mainColor5,
+                        onConfirmBtnTap: () async {
+                          if (kDebugMode) {
+                            print("confirm");
+                          }
+                          Navigator.of(context, rootNavigator: true).pop();
+                          QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.loading,
+                            title: 'Loading',
+                          );
+                          final statuscode =
+                              await Get.find<PopularActivityController>()
+                                  .joinActivity(activityModel.id);
+                          Navigator.of(context, rootNavigator: true).pop();
+
+                          print("statuscode: $statuscode");
+                          if (statuscode == 302) {
+                            QuickAlert.show(
+                              context: context,
+                              type: QuickAlertType.warning,
+                              text: 'Already participated',
+                              confirmBtnColor: AppColors.mainColor5,
+                            );
+                          } else if (statuscode == 201) {
+                            QuickAlert.show(
+                              context: context,
+                              type: QuickAlertType.success,
+                              text: 'participate successful',
+                              confirmBtnColor: AppColors.mainColor5,
+                            );
+                          } else {
+                            QuickAlert.show(
+                                context: context,
+                                type: QuickAlertType.error,
+                                confirmBtnColor: AppColors.mainColor5);
+                          }
+                        });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        top: Dimensions.height20,
+                        bottom: Dimensions.height20,
+                        left: Dimensions.widhth20,
+                        right: Dimensions.widhth20),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
+                        color: AppColors.mainColor1),
+                    child: BigText(
+                      text: "Join Now",
+                      color: Colors.white,
+                    ),
                   ),
                 )
               ],

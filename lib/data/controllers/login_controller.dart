@@ -40,13 +40,13 @@ class LoginController extends GetxController {
     if (response.statusCode == 200) {
       if (kDebugMode) {
         print("login success");
-        Get.offNamed(RouteHelper.getInitial());
       }
       return true;
     } else {
       //failed return
-      print("login fail: ${response.statusCode}");
-      // tokenLogin();
+      if (kDebugMode) {
+        print("login fail: ${response.statusCode}");
+      }
       return false;
     }
   }

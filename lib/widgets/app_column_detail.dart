@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
 import 'package:fyp_2023_activity_enroller/widgets/small_text.dart';
 
 import '../utils/colors.dart';
@@ -13,23 +14,26 @@ import 'icon_and_text_widget.dart';
 class AppColumnDetail extends StatelessWidget {
   //final int pageId;
 
-  final String text;
-  final int stars;
-  final int comments_num;
-  final String date;
-  final String day;
-  final String time;
-  final String location;
+  // final String text;
+  // final int stars;
+  // final int comments_num;
+  // final String date;
+  // final String day;
+  // final String time;
+  // final String location;
+
+  final ActivityModel activityModel;
 
   const AppColumnDetail({
     super.key,
-    required this.text,
-    required this.stars,
-    required this.comments_num,
-    required this.date,
-    required this.day,
-    required this.time,
-    required this.location,
+    required this.activityModel,
+    // required this.text,
+    // required this.stars,
+    // required this.comments_num,
+    // required this.date,
+    // required this.day,
+    // required this.time,
+    // required this.location,
     //required this.pageId
   });
 
@@ -43,7 +47,7 @@ class AppColumnDetail extends StatelessWidget {
             Container(
                 width: Dimensions.screenWidth - Dimensions.widhth45,
                 child: Text(
-                  text,
+                  activityModel.titleEn!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -61,7 +65,7 @@ class AppColumnDetail extends StatelessWidget {
           children: [
             Wrap(
               children: List.generate(
-                  stars,
+                  activityModel.stars!,
                   (index) => Icon(
                         Icons.star,
                         color: AppColors.mainColor2,
@@ -70,7 +74,7 @@ class AppColumnDetail extends StatelessWidget {
             ),
             Wrap(
               children: List.generate(
-                  5 - stars,
+                  5 - activityModel.stars!,
                   (index) => Icon(
                         Icons.star_border_outlined,
                         color: AppColors.mainColor2,
@@ -80,7 +84,7 @@ class AppColumnDetail extends StatelessWidget {
             SizedBox(
               width: Dimensions.widhth10,
             ),
-            SmallText(text: comments_num.toString() + " comments"),
+            SmallText(text: activityModel.comments!.toString() + " comments"),
           ],
         ),
         SizedBox(
@@ -90,7 +94,7 @@ class AppColumnDetail extends StatelessWidget {
           children: [
             IconAndTextWidget(
                 icon: Icons.calendar_month,
-                text: date,
+                text: activityModel.dates![0].date!,
                 iconColor: AppColors.mainColor3),
           ],
         ),
@@ -100,7 +104,9 @@ class AppColumnDetail extends StatelessWidget {
         Row(
           children: [
             IconAndTextWidget(
-                icon: Icons.event, text: day, iconColor: AppColors.mainColor4),
+                icon: Icons.event,
+                text: activityModel.dates![0].day!,
+                iconColor: AppColors.mainColor4),
           ],
         ),
         SizedBox(
@@ -110,7 +116,7 @@ class AppColumnDetail extends StatelessWidget {
           children: [
             IconAndTextWidget(
                 icon: Icons.schedule,
-                text: time,
+                text: activityModel.dates![0].startTime!,
                 iconColor: AppColors.mainColor5),
           ],
         ),
@@ -123,7 +129,7 @@ class AppColumnDetail extends StatelessWidget {
           children: [
             IconAndTextWidget(
                 icon: Icons.location_on,
-                text: location,
+                text: activityModel.location!,
                 iconColor: AppColors.mainColor5),
           ],
         ),
@@ -138,9 +144,7 @@ class AppColumnDetail extends StatelessWidget {
           height: Dimensions.height10,
         ),
         Container(
-          child: ExpandableTextWidget(
-              text:
-                  "Here is the introduction to the activity detail page. It is a expandable text widget, you can put a lot of words here. like ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"),
+          child: ExpandableTextWidget(text: activityModel.desc!),
         ),
       ],
     );
