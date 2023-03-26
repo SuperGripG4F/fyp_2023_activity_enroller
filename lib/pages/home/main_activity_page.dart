@@ -51,7 +51,7 @@ class _MainActivityPageState extends State<MainActivityPage>
     print("current height is " + MediaQuery.of(context).size.height.toString());
     print("current width is " + MediaQuery.of(context).size.width.toString());
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: Stack(children: [
         //sideMenu
         Transform.translate(

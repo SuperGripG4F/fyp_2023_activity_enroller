@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fyp_2023_activity_enroller/widgets/small_text.dart';
+import 'package:get/get.dart';
 
 import '../data/model/announcements.dart';
+import '../routes/route_helper.dart';
 import '../utils/colors.dart';
 import 'big_text_softwrap.dart';
 
@@ -26,6 +28,8 @@ class Announcement_card_widget extends StatelessWidget {
           splashColor: AppColors.mainColor3,
           onTap: () {
             debugPrint('Card tapped.');
+            debugPrint('route to index[$index].');
+            Get.toNamed(RouteHelper.getAnnouncementDetail(index));
           },
           child: SizedBox(
             child: Row(

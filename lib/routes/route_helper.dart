@@ -47,8 +47,8 @@ class RouteHelper {
 
   static String getAnnouncement() => '$announcement';
 
-  static String getAnnouncementDetail(int activityId) =>
-      '$announcementDetail?activityId=$activityId';
+  static String getAnnouncementDetail(int index) =>
+      '$announcementDetail?index=$index';
 
   static String getUserProfile() => '$userProfile';
 
@@ -99,17 +99,16 @@ class RouteHelper {
       fullscreenDialog: true,
       transition: Transition.cupertinoDialog,
     ),
-    // GetPage(
-    //   name: announcementDetail,
-    //   page: () {
-    //     var activityId = Get.parameters['activityId'];
-    //     return AnnouncementsDetailPage(
-    //       activityId: int.parse(activityId!),
-    //     );
-    //   },
-    //   fullscreenDialog: true,
-    //   transition: Transition.cupertinoDialog,
-    // ),
+    GetPage(
+      name: announcementDetail,
+      page: () {
+        var index = Get.parameters['index'];
+        return AnnouncementsDetailPage(
+          index: int.parse(index!),
+        );
+      },
+      transition: Transition.cupertinoDialog,
+    ),
     GetPage(
       name: userProfile,
       page: () {

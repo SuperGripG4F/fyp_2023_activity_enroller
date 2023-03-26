@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      popGesture: false,
+      // popGesture: false,
       //home: RouteHelper.getInitial), // it will go to '/'
       initialRoute: RouteHelper.getLogin(),
       getPages: RouteHelper.routes,

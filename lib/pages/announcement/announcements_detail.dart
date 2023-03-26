@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/activity_announcement_controller.dart';
+import 'package:fyp_2023_activity_enroller/data/model/announcements.dart';
 import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
+import 'package:fyp_2023_activity_enroller/widgets/big_text_softwrap.dart';
 import 'package:fyp_2023_activity_enroller/widgets/header.dart';
 import 'package:get/get.dart';
 
@@ -10,82 +12,72 @@ import '../../widgets/big_text.dart';
 import '../../widgets/small_text.dart';
 import '../../widgets/enrty_point.dart';
 
-class AnnouncementsDetailPage extends StatefulWidget {
-  AnnouncementsDetailPage({
-    super.key,
-  });
+class AnnouncementsDetailPage extends StatelessWidget {
+  final int index;
 
-  @override
-  _AnnouncementsPageState createState() => _AnnouncementsPageState();
-}
-
-class _AnnouncementsPageState extends State<AnnouncementsDetailPage> {
-  //List<Announcement> _announcements = [];
-
-  @override
-  void initState() {
-    super.initState();
-
-    //_fetchAnnouncements();
-  }
-
-  // void _fetchAnnouncements() async {
-  //   String url = AppConstants.BASE_URL + AppConstants.ANNOUNCEMENT_URL;
-  //   http.Response response = await http.get(Uri.parse(url));
-  //   if (response.statusCode == 200) {
-  //     print(response.body);
-  //     List<dynamic> data = json.decode(response.body);
-  //     List<Announcement> announcements =
-  //         data.map((item) => Announcement.fromJson(item)).toList();
-  //     setState(() {
-  //       _announcements = announcements;
-  //     });
-  //   } else {
-  //     print('Failed to fetch announcements');
-  //   }
-  // }
+  AnnouncementsDetailPage({required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
-    // return Scaffold(
-    //   backgroundColor: Colors.white,
-    //   body: Column(
-    //     children: [
-    //       HeaderInfo(),
-    //       // Expanded(
-    //       //   child: ListView.builder(
-    //       //     itemCount: _announcements.length,
-    //       //     itemBuilder: (context, index) {
-    //       //       Announcement announcement = _announcements[index];
-    //       //       return ListTile(
-    //       //         title: Text(announcement.title),
-    //       //         subtitle: Text(announcement.description),
-    //       //         trailing: Text(announcement.date),
-    //       //       );
-    //       //     },
-    //       //   ),
-    //       // ),
-    //     ],
-    //   ),
-    //   bottomNavigationBar: const EntryPoint(),
-    // );
+    final announcementModel =
+        Get.find<ActivityAnnouncementController>().announcementList[index];
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const HeaderInfo(),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: 350,
+                    padding: EdgeInsets.only(bottom: 10),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                      bottom: BorderSide(
+                        width: 1.0,
+                        color: AppColors.textColor,
+                      ),
+                    )),
+                    child: BigTextSoftWrap(
+                      text: announcementModel.title!,
+                      size: 30,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: 350,
+                    padding: EdgeInsets.only(bottom: 10),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                      bottom: BorderSide(
+                        width: 1.0,
+                        color: AppColors.textColor,
+                      ),
+                    )),
+                    child: SmallText(
+                      text: announcementModel.content!,
+                      color: AppColors.BigTextColor,
+                      size: 18,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
-
-// class Announcement {
-//   final String title;
-//   final String description;
-//   final String date;
-
-//   Announcement(
-//       {required this.title, required this.description, required this.date});
-
-//   factory Announcement.fromJson(Map<String, dynamic> json) {
-//     return Announcement(
-//       title: json['title'],
-//       description: json['description'],
-//       date: json['date'],
-//     );
-//   }
-//}

@@ -133,10 +133,6 @@ class _ActivityPageBody extends State<ActivityPageBody> {
                   itemBuilder: (context, index) {
                     ActivityModel activityModel =
                         recommendedActivity.recommendedActivityList[index]!;
-                    print("img path:" +
-                        AppConstants.IMG_PATH +
-                        activityModel.poster!);
-
                     return GestureDetector(
                       onTap: () {
                         Get.toNamed(

@@ -19,20 +19,22 @@ class IconAndTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          color: iconColor,
-          size: Dimensions.size24,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        SmallText(
-          text: text,
-        ),
-      ],
+    return Container(
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: iconColor,
+            size: Dimensions.size24,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          SmallText(
+            text: text,
+          ),
+        ],
+      ),
     );
   }
 }
