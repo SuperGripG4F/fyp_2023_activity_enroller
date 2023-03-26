@@ -23,7 +23,7 @@ class SearchPage extends StatelessWidget {
             Column(
               children: const [
                 //showing the header
-                Header_info(),
+                HeaderInfo(),
                 Expanded(
                     child: SingleChildScrollView(
                   child: SearchPageBody(),

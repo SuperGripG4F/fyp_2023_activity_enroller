@@ -6,7 +6,6 @@ import 'package:fyp_2023_activity_enroller/data/repository/search_activity_repo.
 import 'package:get/get.dart';
 import 'package:outline_search_bar/outline_search_bar.dart';
 
-import '../../data/controllers/recommended_activity_controller.dart';
 import '../../data/controllers/search_activity_controller.dart';
 import '../../data/model/activity_model.dart';
 import '../../routes/route_helper.dart';
@@ -34,6 +33,7 @@ class _SearchPageBodyState extends State<SearchPageBody> {
   @override
   void initState() {
     super.initState();
+    Get.lazyPut(() => SeacrhActivityController(searchActivityRepo: Get.find()));
     Get.find<SeacrhActivityController>().getActivityList();
     pageController.addListener(() {
       setState(() {

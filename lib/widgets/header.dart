@@ -5,8 +5,8 @@ import '../utils/app_constants.dart';
 import '../utils/colors.dart';
 import 'big_text.dart';
 
-class Header_info extends StatelessWidget {
-  const Header_info({
+class HeaderInfo extends StatelessWidget {
+  const HeaderInfo({
     super.key,
   });
 

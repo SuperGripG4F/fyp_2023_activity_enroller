@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
 import 'package:get/get.dart';
-
-import '../repository/activity_detail.dart';
+import '../repository/activity_detail_repo.dart';
 
 class ActivityDetailController extends GetxController {
   final ActivityDetailRepo activityDetailRepo;

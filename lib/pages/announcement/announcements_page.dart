@@ -6,8 +6,10 @@ import 'package:fyp_2023_activity_enroller/data/controllers/joined_activity_cont
 import 'package:fyp_2023_activity_enroller/data/controllers/popular_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/recommended_activity_controller.dart';
 import 'package:fyp_2023_activity_enroller/data/model/activity_model.dart';
+import 'package:fyp_2023_activity_enroller/data/model/announcements.dart';
 import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
 import 'package:fyp_2023_activity_enroller/widgets/app_column_s.dart';
+import 'package:fyp_2023_activity_enroller/widgets/big_text_softwrap.dart';
 import 'package:fyp_2023_activity_enroller/widgets/enrty_point.dart';
 import 'package:fyp_2023_activity_enroller/widgets/header.dart';
 import 'package:get/get.dart';
@@ -15,128 +17,70 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/controllers/activity_announcement_controller.dart';
 import '../../routes/route_helper.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
+import '../../widgets/announcement_card_widget.dart';
 import '../../widgets/app_column.dart';
 import '../../widgets/big_text.dart';
 import '../../widgets/cirular_progress.dart';
 import '../../widgets/icon_and_text_widget.dart';
 import '../../widgets/small_text.dart';
+import 'announcements_detail.dart';
 
 class AnnouncementsPage extends StatefulWidget {
   const AnnouncementsPage({super.key});
 
   @override
-  State<AnnouncementsPage> createState() => _AnnouncementsPage();
+  State<AnnouncementsPage> createState() => _AnnouncementsPageState();
 }
 
-class _AnnouncementsPage extends State<AnnouncementsPage> {
-  PageController pageController = PageController(viewportFraction: 0.85);
-  var _currPageValue = 0.0;
-  double _scaleFactor = 0.8;
-  double _height = Dimensions.pageViewContainer;
-
+class _AnnouncementsPageState extends State<AnnouncementsPage> {
   @override
   void initState() {
+    Get.lazyPut(() =>
+        ActivityAnnouncementController(activityAnnouncementRepo: Get.find()));
+    Get.find<ActivityAnnouncementController>().getAnnouncementList();
     super.initState();
-    pageController.addListener(() {
-      setState(() {
-        _currPageValue = pageController.page!; //not going to be null
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          const Header_info(),
+          const HeaderInfo(),
           Container(
             margin: EdgeInsets.only(left: Dimensions.widhth20),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 BigText(text: "Announcements"),
-                SizedBox(
-                  width: Dimensions.widhth10,
-                ),
               ],
             ),
           ),
-          //list of food and images section
-          GetBuilder<JoinedActivityController>(builder: (joinedActivity) {
-            return joinedActivity.isLoaded
+          SizedBox(
+            height: Dimensions.height20,
+          ),
+          Expanded(child: GetBuilder<ActivityAnnouncementController>(
+              builder: (activityAnnouncement) {
+            return activityAnnouncement.isLoaded
                 ? ListView.builder(
+                    padding: EdgeInsets.zero,
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: joinedActivity.joinedActivityList.length,
+                    // physics: const NeverScrollableScrollPhysics(),
+                    itemCount: activityAnnouncement.announcementList.length,
                     itemBuilder: (context, index) {
-                      ActivityModel activityModel =
-                          joinedActivity.joinedActivityList[index]!;
-                      return GestureDetector(
-                        onTap: () {
-                          Get.toNamed(RouteHelper.getAnnouncementDetail(index));
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(
-                              left: Dimensions.widhth20,
-                              right: Dimensions.widhth20,
-                              bottom: Dimensions.height10),
-                          child: Row(
-                            children: [
-                              Container(
-                                  width: Dimensions.listViewImgSize,
-                                  height: Dimensions.listViewImgSize,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        Dimensions.radius20,
-                                      ),
-                                      color: Colors.white38,
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              AppConstants.IMG_PATH +
-                                                  activityModel.poster!)))),
-                              //focus the widget to get all available space
-                              Expanded(
-                                child: Container(
-                                  height: Dimensions.listViewTextContSize,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(
-                                            Dimensions.radius20),
-                                        bottomRight: Radius.circular(
-                                            Dimensions.radius20)),
-                                    color: Colors.white,
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      top: Dimensions.height1,
-                                      left: Dimensions.widhth10,
-                                      right: Dimensions.widhth10,
-                                      bottom: Dimensions.height1,
-                                    ),
-                                    child: AppColumnSmall(
-                                        text: activityModel.titleEn!,
-                                        stars: activityModel.stars!,
-                                        comments_num: activityModel.comments!,
-                                        date: activityModel.dates![0].date!,
-                                        day: activityModel.dates![0].day!,
-                                        time:
-                                            activityModel.dates![0].startTime!,
-                                        location: activityModel.location!),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
+                      AnnouncementModel announcementModel =
+                          activityAnnouncement.announcementList[index]!;
+
+                      return Announcement_card_widget(
+                          announcementModel: announcementModel, index: index);
                     })
                 : CircularProgress();
-          }),
+          }))
         ],
       ),
       bottomNavigationBar: const EntryPoint(),

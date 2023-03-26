@@ -5,10 +5,10 @@ import 'package:fyp_2023_activity_enroller/widgets/enrty_point.dart';
 import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
 import 'package:get/get.dart';
 
-import '../../data/controllers/popular_activity_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/big_text.dart';
+import '../../widgets/header.dart';
 import '../../widgets/small_text.dart';
 
 class MainActivityPage extends StatefulWidget {
@@ -37,8 +37,6 @@ class _MainActivityPageState extends State<MainActivityPage>
         parent: _animationController, curve: Curves.fastOutSlowIn));
     animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
         parent: _animationController, curve: Curves.fastOutSlowIn));
-
-    Get.find<PopularActivityController>().getPopularActivityList();
     super.initState();
   }
 
@@ -61,38 +59,12 @@ class _MainActivityPageState extends State<MainActivityPage>
           child: Column(
             children: [
               //showing the header
-              Container(
-                margin: const EdgeInsets.only(top: 45, bottom: 15),
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Column(children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          BigText(
-                            text: AppConstants.APP_NAME,
-                            color: AppColors.mainColor1,
-                          ),
-                          Row(
-                            children: const [
-                              SmallText(
-                                text: AppConstants.APP_VERSION,
-                                color: Colors.black54,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ]),
-              ),
+              const HeaderInfo(),
               //showing the body
               Expanded(
                   child: SingleChildScrollView(
                 child: Column(
-                  children: [
+                  children: const [
                     ActivityPageBody(),
                   ],
                 ),

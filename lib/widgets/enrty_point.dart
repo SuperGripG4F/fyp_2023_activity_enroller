@@ -46,24 +46,24 @@ class _EntryPointState extends State<EntryPoint> {
                           selectedBottomNav = bottomNavs[index];
                           bottomNavHelper.pageValue = index;
                           if (bottomNavHelper.pageValue == 0) {
-                            Get.toNamed(
+                            Get.offNamed(
                               RouteHelper.getInitial(),
                             );
                           } else if (bottomNavHelper.pageValue == 1) {
                             if (kDebugMode) {
                               print(Get.routing);
                             }
-                            Get.toNamed(RouteHelper.getSearchActivity());
+                            Get.offNamed(RouteHelper.getSearchActivity());
                           } else if (bottomNavHelper.pageValue == 3) {
                             if (kDebugMode) {
                               print(Get.routing);
                             }
-                            Get.toNamed(RouteHelper.getAnnouncement());
+                            Get.offNamed(RouteHelper.getAnnouncement());
                           } else if (bottomNavHelper.pageValue == 4) {
                             if (kDebugMode) {
                               print(Get.routing);
                             }
-                            Get.toNamed(RouteHelper.getUserProfile());
+                            Get.offNamed(RouteHelper.getUserProfile());
                           }
                         });
                       }

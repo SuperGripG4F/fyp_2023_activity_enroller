@@ -37,6 +37,13 @@ class _ActivityPageBody extends State<ActivityPageBody> {
   @override
   void initState() {
     super.initState();
+    Get.lazyPut(
+        () => PopularActivityController(popularActivityRepo: Get.find()));
+    Get.lazyPut(() =>
+        RecommondedActivityController(recommendedActivityRepo: Get.find()));
+
+    Get.find<PopularActivityController>().getPopularActivityList();
+    Get.find<RecommondedActivityController>().getRecommendedActivityList();
     pageController.addListener(() {
       setState(() {
         _currPageValue = pageController.page!; //not going to be null

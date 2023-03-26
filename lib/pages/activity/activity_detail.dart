@@ -12,7 +12,7 @@ import 'package:native_dialog/native_dialog.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
-import '../../data/controllers/activity_detail.controller.dart';
+import '../../data/controllers/activity_detail_controller.dart';
 import '../../data/controllers/search_activity_controller.dart';
 import '../../data/model/activity_model.dart';
 import '../../routes/route_helper.dart';

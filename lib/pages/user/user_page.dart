@@ -24,6 +24,7 @@ class _UserPageState extends State<UserPage> {
   @override
   void initState() {
     super.initState();
+    Get.lazyPut(() => UserInfoController(apiClient: Get.find()));
     Get.find<UserInfoController>().getUserInfo();
   }
 
@@ -33,7 +34,7 @@ class _UserPageState extends State<UserPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Header_info(),
+            const HeaderInfo(),
             Center(
               child: Padding(
                   padding: const EdgeInsets.only(bottom: 20),

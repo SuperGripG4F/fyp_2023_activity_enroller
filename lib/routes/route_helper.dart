@@ -99,17 +99,17 @@ class RouteHelper {
       fullscreenDialog: true,
       transition: Transition.cupertinoDialog,
     ),
-    GetPage(
-      name: announcementDetail,
-      page: () {
-        var activityId = Get.parameters['activityId'];
-        return AnnouncementsDetailPage(
-          activityId: int.parse(activityId!),
-        );
-      },
-      fullscreenDialog: true,
-      transition: Transition.cupertinoDialog,
-    ),
+    // GetPage(
+    //   name: announcementDetail,
+    //   page: () {
+    //     var activityId = Get.parameters['activityId'];
+    //     return AnnouncementsDetailPage(
+    //       activityId: int.parse(activityId!),
+    //     );
+    //   },
+    //   fullscreenDialog: true,
+    //   transition: Transition.cupertinoDialog,
+    // ),
     GetPage(
       name: userProfile,
       page: () {
