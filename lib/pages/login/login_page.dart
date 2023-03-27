@@ -21,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    Get.lazyPut(() => LoginController(apiClient: Get.find()));
     tokenLogin();
   }
 
@@ -90,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: Dimensions.height10,
               ),
-              const SmallText(text: "Login to your account"),
+              SmallText(text: "Login to your account"),
               SizedBox(
                 height: Dimensions.height10,
               ),

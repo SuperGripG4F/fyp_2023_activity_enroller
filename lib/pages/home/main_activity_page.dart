@@ -52,80 +52,22 @@ class _MainActivityPageState extends State<MainActivityPage>
     print("current width is " + MediaQuery.of(context).size.width.toString());
     return Scaffold(
       // backgroundColor: Colors.white,
-      body: Stack(children: [
-        //sideMenu
-        Transform.translate(
-          offset: Offset(animation.value * 288, 0),
-          child: Column(
-            children: [
-              //showing the header
-              const HeaderInfo(),
-              //showing the body
-              Expanded(
-                  child: SingleChildScrollView(
-                child: Column(
-                  children: const [
-                    ActivityPageBody(),
-                  ],
-                ),
-              )),
-            ],
+      body: SafeArea(
+        child: Column(children: [
+          HeaderInfo(
+            title: AppConstants.APP_NAME,
+            subTitle: AppConstants.APP_VERSION,
           ),
-        ),
-        //sideMenu
-        AnimatedPositioned(
-          duration: Duration(milliseconds: 200),
-          curve: Curves.fastOutSlowIn,
-          width: 288,
-          left: isSideBarClosed ? -288 : 0,
-          height: MediaQuery.of(context).size.height,
-          child: SideMenu(),
-        ),
-        //btn
-        AnimatedPositioned(
-          duration: Duration(milliseconds: 200),
-          curve: Curves.fastOutSlowIn,
-          top: isSideBarClosed ? -6 : 16,
-          left: isSideBarClosed ? 320 : 200,
-          child: SafeArea(
-            //alignment: Alignment.topLeft,
-            child: GestureDetector(
-              onTap: () {
-                print("Side taped");
-                setState(() {
-                  if (isSideBarClosed) {
-                    _animationController.forward();
-                  } else {
-                    _animationController.reverse();
-                  }
-                  isSideBarClosed = !isSideBarClosed;
-                });
-              },
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                width: Dimensions.widhth45,
-                height: Dimensions.height45,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: isSideBarClosed
-                        ? AppColors.mainColor1
-                        : AppColors.mainColor2),
-                child: isSideBarClosed
-                    ? Icon(
-                        Icons.menu,
-                        color: Colors.white,
-                        size: Dimensions.size24,
-                      )
-                    : Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: Dimensions.size24,
-                      ),
-              ),
+          Expanded(
+              child: SingleChildScrollView(
+            child: Column(
+              children: const [
+                ActivityPageBody(),
+              ],
             ),
-          ),
-        ),
-      ]),
+          )),
+        ]),
+      ),
       bottomNavigationBar: const EntryPoint(),
     );
   }

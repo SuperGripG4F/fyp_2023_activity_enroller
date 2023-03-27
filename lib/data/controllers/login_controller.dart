@@ -16,7 +16,8 @@ class LoginController extends GetxController {
 
   Future<bool> login() async {
     print("login path:" + AppConstants.LOGIN);
-    final response = await apiClient.postData(AppConstants.LOGIN,
+    print("login:$username, $password");
+    final response = await apiClient.postLogin(AppConstants.LOGIN,
         {'username': username.value, 'password': password.value});
     if (response.statusCode == 200) {
       if (kDebugMode) {

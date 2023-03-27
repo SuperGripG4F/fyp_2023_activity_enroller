@@ -48,40 +48,32 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const HeaderInfo(),
-          Container(
-            margin: EdgeInsets.only(left: Dimensions.widhth20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                BigText(text: "Announcements"),
-              ],
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            HeaderInfo(
+              title: "Announcements",
             ),
-          ),
-          SizedBox(
-            height: Dimensions.height20,
-          ),
-          Expanded(child: GetBuilder<ActivityAnnouncementController>(
-              builder: (activityAnnouncement) {
-            return activityAnnouncement.isLoaded
-                ? ListView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: activityAnnouncement.announcementList.length,
-                    itemBuilder: (context, index) {
-                      AnnouncementModel announcementModel =
-                          activityAnnouncement.announcementList[index]!;
+            Expanded(child: GetBuilder<ActivityAnnouncementController>(
+                builder: (activityAnnouncement) {
+              return activityAnnouncement.isLoaded
+                  ? ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      // physics: const NeverScrollableScrollPhysics(),
+                      itemCount: activityAnnouncement.announcementList.length,
+                      itemBuilder: (context, index) {
+                        AnnouncementModel announcementModel =
+                            activityAnnouncement.announcementList[index]!;
 
-                      return Announcement_card_widget(
-                          announcementModel: announcementModel, index: index);
-                    })
-                : CircularProgress();
-          }))
-        ],
+                        return Announcement_card_widget(
+                            announcementModel: announcementModel, index: index);
+                      })
+                  : CircularProgress();
+            }))
+          ],
+        ),
       ),
       bottomNavigationBar: const EntryPoint(),
     );

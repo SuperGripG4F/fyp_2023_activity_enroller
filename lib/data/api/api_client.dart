@@ -38,6 +38,12 @@ class ApiClient extends GetConnect implements GetxService {
 
   Future<Response> getData(String uri) async {
     //uri only need endpoint
+    //make sure the token is retrieved first
+    token = await AppConstants.retrieveToken();
+    _mainHeaders = {
+      'Content-type': 'application/json; charset=UTF-8',
+      'Authorization': "Token $token",
+    };
     try {
       Response response = await get(uri, headers: _mainHeaders);
       return response;
@@ -48,6 +54,11 @@ class ApiClient extends GetConnect implements GetxService {
 
   Future<Response> getDataQuery(String uri, Map<String, dynamic>? query) async {
     //uri only need endpoint
+    token = await AppConstants.retrieveToken();
+    _mainHeaders = {
+      'Content-type': 'application/json; charset=UTF-8',
+      'Authorization': "Token $token",
+    };
     try {
       Response response = await get(uri, headers: _mainHeaders, query: query);
       return response;
@@ -57,11 +68,30 @@ class ApiClient extends GetConnect implements GetxService {
   }
 
   Future<Response> postData(String uri, dynamic body) async {
+    //make sure the token is retrieved first
+    token = await AppConstants.retrieveToken();
     try {
       Response response = await post(
         uri,
         body,
         headers: _mainHeaders,
+      );
+      if (kDebugMode) {
+        print("responseBygetx: " + response.statusCode.toString());
+      }
+      return response;
+      ;
+    } catch (e) {
+      return Response(statusCode: 1, statusText: e.toString());
+    }
+  }
+
+  Future<Response> postLogin(String uri, dynamic body) async {
+    try {
+      Response response = await post(
+        uri,
+        body,
+        // headers: _mainHeaders,
       );
       if (kDebugMode) {
         print("responseBygetx: " + response.statusCode.toString());

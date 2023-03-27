@@ -54,6 +54,11 @@ class _EntryPointState extends State<EntryPoint> {
                               print(Get.routing);
                             }
                             Get.offNamed(RouteHelper.getSearchActivity());
+                          } else if (bottomNavHelper.pageValue == 2) {
+                            if (kDebugMode) {
+                              print(Get.routing);
+                            }
+                            Get.offNamed(RouteHelper.getHistory());
                           } else if (bottomNavHelper.pageValue == 3) {
                             if (kDebugMode) {
                               print(Get.routing);

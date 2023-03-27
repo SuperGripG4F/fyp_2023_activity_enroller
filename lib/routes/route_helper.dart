@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
 import 'package:fyp_2023_activity_enroller/pages/announcement/announcements_page.dart';
+import 'package:fyp_2023_activity_enroller/pages/history/history_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/login/login_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/login/welcome_page.dart';
@@ -21,9 +22,9 @@ class RouteHelper {
   static const String recommendedActivity = "/recommended-activity";
   static const String popularActivity = "/popular-activity";
   static const String searchActivity = "/search-activity";
-
   static const String activityDetail = "/activity-detail";
 
+  static const String history = "/history";
   static const String announcement = "/announcement";
   static const String announcementDetail = "/announcement-detail";
   static const String userProfile = "/user-profile";
@@ -44,6 +45,8 @@ class RouteHelper {
       '$activityDetail?activityId=$activityId';
 
   static String getSearchActivity() => '$searchActivity';
+
+  static String getHistory() => '$history';
 
   static String getAnnouncement() => '$announcement';
 
@@ -90,6 +93,14 @@ class RouteHelper {
         return ActivityDetail(activityId: activityId!);
       },
       transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: history,
+      page: () {
+        return const HistoryPage();
+      },
+      fullscreenDialog: true,
+      transition: Transition.cupertinoDialog,
     ),
     GetPage(
       name: announcement,

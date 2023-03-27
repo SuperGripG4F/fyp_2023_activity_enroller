@@ -6,14 +6,17 @@ import '../utils/colors.dart';
 import 'big_text.dart';
 
 class HeaderInfo extends StatelessWidget {
-  const HeaderInfo({
-    super.key,
-  });
+  final title;
+  String subTitle;
+
+  HeaderInfo({Key? key, required this.title, this.subTitle = ''})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 45, bottom: 15),
+      // margin: const EdgeInsets.only(top: 45, bottom: 15),
+      margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Column(children: [
         Row(
@@ -22,13 +25,13 @@ class HeaderInfo extends StatelessWidget {
             Column(
               children: [
                 BigText(
-                  text: AppConstants.APP_NAME,
+                  text: title,
                   color: AppColors.mainColor1,
                 ),
                 Row(
-                  children: const [
+                  children: [
                     SmallText(
-                      text: AppConstants.APP_VERSION,
+                      text: subTitle == '' ? '' : subTitle,
                       color: Colors.black54,
                     ),
                   ],

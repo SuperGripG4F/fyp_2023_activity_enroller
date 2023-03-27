@@ -18,19 +18,17 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         // backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            Column(
-              children: const [
-                //showing the header
-                HeaderInfo(),
-                Expanded(
-                    child: SingleChildScrollView(
-                  child: SearchPageBody(),
-                )),
-              ],
-            )
-          ],
+        body: SafeArea(
+          child: Column(
+            children: [
+              //showing the header
+              HeaderInfo(title: 'Search'),
+              const Expanded(
+                  child: SingleChildScrollView(
+                child: SearchPageBody(),
+              )),
+            ],
+          ),
         ),
         bottomNavigationBar: const EntryPoint());
   }

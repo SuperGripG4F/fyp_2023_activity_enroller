@@ -37,9 +37,9 @@ Future<void> init() async {
   // Get.lazyPut(() => ActivityDetailController(activityDetailRepo: Get.find()));
 
   //login controllers
-  Get.lazyPut(() => LoginController(apiClient: Get.find()));
+  // Get.lazyPut(() => LoginController(apiClient: Get.find()));
   //userinfo controllers
-  Get.lazyPut(() => UserInfoController(apiClient: Get.find()));
+  // Get.lazyPut(() => UserInfoController(apiClient: Get.find()));
 
   Get.put(BottomNavHelper());
   Get.put(RouteObserver());

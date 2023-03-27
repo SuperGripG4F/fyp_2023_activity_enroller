@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppConstants {
-  //static const String BASE_URL = "http://192.168.50.5:1880";
+  // static const String BASE_URL = "http://192.168.50.5:1880";
   static const String BASE_URL = "http://127.0.0.1:8000";
   static const String API_VERSION = "/api/v1";
 

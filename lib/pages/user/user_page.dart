@@ -2,11 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fyp_2023_activity_enroller/data/controllers/user_info_controller.dart';
+import 'package:fyp_2023_activity_enroller/routes/route_helper.dart';
+import 'package:fyp_2023_activity_enroller/utils/app_constants.dart';
 import 'package:fyp_2023_activity_enroller/widgets/big_text.dart';
 import 'package:fyp_2023_activity_enroller/widgets/enrty_point.dart';
 import 'package:fyp_2023_activity_enroller/widgets/header.dart';
 import 'package:fyp_2023_activity_enroller/widgets/small_text.dart';
 import 'package:get/get.dart';
+import 'package:quickalert/quickalert.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import '../../data/model/user_model.dart';
 import '../../utils/colors.dart';
@@ -31,28 +35,58 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const HeaderInfo(),
-            Center(
-              child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: BigText(
-                    text: "Profile",
-                    size: 32,
-                  )),
-            ),
-            DisplayImage(
-              imagePath: "assets/image/user.png",
-              onPressed: () {},
-            ),
-            buildUserInfoDisplay('username', 'User name'),
-            buildUserInfoDisplay('email', 'Email'),
-            buildUserInfoDisplay('firstname', 'First name'),
-            buildUserInfoDisplay('lastname', 'Last name'),
-            buildUserInfoDisplay('phone', 'Phone'),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              HeaderInfo(
+                title: "Profile",
+              ),
+              // Center(
+              //   child: Padding(
+              //       padding: const EdgeInsets.only(bottom: 20),
+              //       child: BigText(
+              //         text: "Profile",
+              //         size: 32,
+              //       )),
+              // ),
+              DisplayImage(
+                imagePath: "assets/image/user.png",
+                onPressed: () {},
+              ),
+              buildUserInfoDisplay('username', 'User name'),
+              buildUserInfoDisplay('email', 'Email'),
+              buildUserInfoDisplay('firstname', 'First name'),
+              buildUserInfoDisplay('lastname', 'Last name'),
+              buildUserInfoDisplay('phone', 'Phone'),
+              MaterialButton(
+                onPressed: () async {
+                  QuickAlert.show(
+                      context: context,
+                      type: QuickAlertType.confirm,
+                      text: "Do you want to logout",
+                      confirmBtnText: 'Yes',
+                      cancelBtnText: 'No',
+                      confirmBtnColor: AppColors.mainColor5,
+                      onConfirmBtnTap: () async {
+                        Navigator.of(context, rootNavigator: true).pop();
+                        AppConstants.removeToken();
+                        Get.offNamed(RouteHelper.getLogin());
+                      });
+                },
+                disabledColor: Colors.grey,
+                disabledTextColor: Colors.white,
+                disabledElevation: 0,
+                minWidth: 300,
+                height: 60,
+                color: Colors.red[400],
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                child: const Text('Logout'),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: const EntryPoint(),
@@ -95,7 +129,9 @@ class _UserPageState extends State<UserPage> {
                                     // navigateSecondPage(editPage);
                                   },
                                   child: SmallText(
-                                    text: UserInfoController.userInfo[getValue],
+                                    text:
+                                        UserInfoController.userInfo[getValue] ??
+                                            "",
                                     size: 16,
                                   ))),
                         ],

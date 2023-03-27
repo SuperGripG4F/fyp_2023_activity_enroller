@@ -23,60 +23,68 @@ class AnnouncementsDetailPage extends StatelessWidget {
         Get.find<ActivityAnnouncementController>().announcementList[index];
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const HeaderInfo(),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    width: 350,
-                    padding: EdgeInsets.only(bottom: 10),
-                    decoration: const BoxDecoration(
-                        border: Border(
-                      bottom: BorderSide(
-                        width: 1.0,
-                        color: AppColors.textColor,
-                      ),
-                    )),
-                    child: BigTextSoftWrap(
-                      text: announcementModel.title!,
-                      size: 30,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: const [
+                SizedBox(
+                  width: 10,
+                ),
+                BackButton(),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: 350,
-                    padding: EdgeInsets.only(bottom: 10),
-                    decoration: const BoxDecoration(
-                        border: Border(
-                      bottom: BorderSide(
-                        width: 1.0,
-                        color: AppColors.textColor,
+                    Container(
+                      width: 350,
+                      padding: const EdgeInsets.only(bottom: 10),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                        bottom: BorderSide(
+                          width: 1.0,
+                          color: AppColors.textColor,
+                        ),
+                      )),
+                      child: BigTextSoftWrap(
+                        text: announcementModel.title!,
+                        size: 30,
                       ),
-                    )),
-                    child: SmallText(
-                      text: announcementModel.content!,
-                      color: AppColors.BigTextColor,
-                      size: 18,
                     ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: 350,
+                      padding: EdgeInsets.only(bottom: 10),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                        bottom: BorderSide(
+                          width: 1.0,
+                          color: AppColors.textColor,
+                        ),
+                      )),
+                      child: SmallText(
+                        text: announcementModel.content!,
+                        color: AppColors.BigTextColor,
+                        size: 18,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

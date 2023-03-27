@@ -30,7 +30,7 @@ class ActivityAnnouncementController extends GetxController {
 
       if (kDebugMode) {
         print("got activity announcements");
-        print(_announcementList[0].content);
+        // print(_announcementList![0].content ?? "");
       }
 
       _isLoaded = true;

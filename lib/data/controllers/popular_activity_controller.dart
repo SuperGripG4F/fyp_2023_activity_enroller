@@ -15,9 +15,8 @@ class PopularActivityController extends GetxController {
   bool get isLoaded => _isLoaded;
 
   Future<void> getPopularActivityList() async {
-    //put a await untill we get the data
-    //json response
-    //everthing save here
+    bool retry = true;
+
     Response response = await popularActivityRepo.getPopularActivityList();
     if (response.statusCode == 200) {
       if (kDebugMode) {
@@ -30,6 +29,8 @@ class PopularActivityController extends GetxController {
       update();
     } else {
       //failed return
+      print(
+          "fail to got popular activity list${response.statusCode} : ${response.body}");
     }
   }
 

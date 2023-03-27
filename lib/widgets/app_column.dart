@@ -63,7 +63,7 @@ class AppColumn extends StatelessWidget {
             SizedBox(
               width: Dimensions.widhth10,
             ),
-            SmallText(text: comments_num.toString() + " comments"),
+            SmallText(text: "$comments_num comments"),
           ],
         ),
         SizedBox(
