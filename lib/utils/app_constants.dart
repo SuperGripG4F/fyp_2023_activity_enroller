@@ -24,6 +24,9 @@ class AppConstants {
       "$SEARCH_ACTIVITY_URL/detail";
   static const String JOIN_ACTIVITY_URL = "$API_VERSION/activities/join";
   static const String JOINED_ACTIVITY_URL = "$API_VERSION/activities/joined";
+  static const String COMMENT_ACTIVITY_URL =
+      "$API_VERSION/activities/joined/comment";
+
   static const String ANNOUNCEMENT_URL =
       "$API_VERSION/activities/announcements";
   static const String APP_NAME = "Activity Helper";

@@ -61,7 +61,11 @@ class _HistoryPage extends State<HistoryPage> {
                     itemBuilder: (BuildContext context, int index) {
                       ActivityModel activityModel =
                           joinedActivity.joinedActivityList[index]!;
-                      return SmallAppColumn(activityModel: activityModel);
+                      return GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RouteHelper.getHistoryActivity(index));
+                          },
+                          child: SmallAppColumn(activityModel: activityModel));
                     },
                   )
                 : CircularProgress();
@@ -81,6 +85,7 @@ class SmallAppColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 10, bottom: 10),
+      // width: MediaQuery.of(context).size.width * 0.9,
       child: SizedBox(
         child: Stack(
           alignment: Alignment.bottomCenter,

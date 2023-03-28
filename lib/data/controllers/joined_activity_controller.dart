@@ -37,6 +37,23 @@ class JoinedActivityController extends GetxController {
     }
   }
 
+  Future<bool> postComment(String id, String rating, String comment) async {
+    Response response =
+        await joinedActivityRepo.postComment(id, rating, comment);
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("post comment success");
+      }
+      return true;
+    } else {
+      //failed return
+      if (kDebugMode) {
+        print("response.statusCode == ${response.statusCode}");
+      }
+      return false;
+    }
+  }
+
   @override
   void onClose() {
     // 取消未完成的异步任务或网络请求

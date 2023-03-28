@@ -191,11 +191,14 @@ class _ActivityDetailState extends State<ActivityDetail> {
                                 );
                               } else if (statuscode == 201) {
                                 QuickAlert.show(
-                                  context: context,
-                                  type: QuickAlertType.success,
-                                  text: 'participate successful',
-                                  confirmBtnColor: AppColors.mainColor5,
-                                );
+                                    context: context,
+                                    type: QuickAlertType.success,
+                                    text: 'participate successful',
+                                    confirmBtnColor: AppColors.mainColor5,
+                                    onConfirmBtnTap: () {
+                                      Get.back();
+                                      Get.back();
+                                    });
                               } else {
                                 QuickAlert.show(
                                     context: context,

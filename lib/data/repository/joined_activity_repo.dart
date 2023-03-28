@@ -11,4 +11,9 @@ class JoinedActivityRepo extends GetxService {
   Future<Response> getJoinedActivityList() async {
     return await apiClient.getData(AppConstants.JOINED_ACTIVITY_URL);
   }
+
+  Future<Response> postComment(String id, String rating, String comment) async {
+    return await apiClient.postData(AppConstants.COMMENT_ACTIVITY_URL,
+        {"activity_id": id, "rating": rating, "comment": comment});
+  }
 }

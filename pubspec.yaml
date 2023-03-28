@@ -39,6 +39,7 @@ dependencies:
   # alert_dialog: ^1.0.0
   native_dialog: ^0.1.1
   quickalert: ^1.0.1
+  flutter_rating_bar: ^4.0.1
 
   # gallery images
   photo_view: ^0.13.0

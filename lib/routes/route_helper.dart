@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:fyp_2023_activity_enroller/components/side_menu.dart';
 import 'package:fyp_2023_activity_enroller/pages/announcement/announcements_page.dart';
+import 'package:fyp_2023_activity_enroller/pages/history/history_activity_detail.dart';
 import 'package:fyp_2023_activity_enroller/pages/history/history_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/home/main_activity_page.dart';
 import 'package:fyp_2023_activity_enroller/pages/login/login_page.dart';
@@ -19,12 +20,13 @@ class RouteHelper {
   static const String login = "/login";
   static const String initial = "/home";
   //to detail page
-  static const String recommendedActivity = "/recommended-activity";
-  static const String popularActivity = "/popular-activity";
+  // static const String recommendedActivity = "/recommended-activity";
+
   static const String searchActivity = "/search-activity";
   static const String activityDetail = "/activity-detail";
 
   static const String history = "/history";
+  static const String historyActivity = "/history-activity";
   static const String announcement = "/announcement";
   static const String announcementDetail = "/announcement-detail";
   static const String userProfile = "/user-profile";
@@ -35,11 +37,11 @@ class RouteHelper {
 
   static String getInitial() => '$initial';
 
-  static String getPopularActivity(int pageId) =>
-      '$popularActivity?pageId=$pageId';
+  static String getHistoryActivity(int pageId) =>
+      '$historyActivity?pageId=$pageId';
 
-  static String getRecommandedActivity(int pageId) =>
-      '$recommendedActivity?pageId=$pageId';
+  // static String getRecommandedActivity(int pageId) =>
+  //     '$recommendedActivity?pageId=$pageId';
 
   static String getActivityDetail(int activityId) =>
       '$activityDetail?activityId=$activityId';
@@ -101,6 +103,15 @@ class RouteHelper {
       },
       fullscreenDialog: true,
       transition: Transition.cupertinoDialog,
+    ),
+    GetPage(
+      name: historyActivity,
+      page: () {
+        final pageId = Get.parameters['pageId'];
+        print("pageId: $pageId");
+        return HistoryActivityDetail(pageId: int.parse(pageId!));
+      },
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: announcement,
