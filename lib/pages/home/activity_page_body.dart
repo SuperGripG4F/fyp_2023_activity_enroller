@@ -122,7 +122,10 @@ class _ActivityPageBody extends State<ActivityPageBody> {
             ],
           ),
         ),
-        //list of food and images section
+        //list of images section
+        SizedBox(
+          height: Dimensions.height30,
+        ),
         GetBuilder<RecommondedActivityController>(
             builder: (recommendedActivity) {
           return recommendedActivity.isLoaded

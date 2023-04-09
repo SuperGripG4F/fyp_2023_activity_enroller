@@ -54,102 +54,104 @@ class _SearchPageBodyState extends State<SearchPageBody> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(left: Dimensions.widhth20, right: 20),
+          margin:
+              EdgeInsets.only(left: Dimensions.widhth20, right: 20, bottom: 20),
           child: OutlineSearchBar(
             hintText: 'Search... ',
             onKeywordChanged: (value) => setState(() => _searchTerm = value),
           ),
         ),
-        GetBuilder<SeacrhActivityController>(builder: (searchActivity) {
-          if (searchActivity.isLoaded) {
-            List allActivity = searchActivity.ActivityList;
-            if (kDebugMode) {
-              print("search term:" + _searchTerm);
-            }
-            List filteredActivity = allActivity
-                .where((allActivity) => allActivity.titleEn
-                    .toLowerCase()
-                    .contains(_searchTerm.toLowerCase()))
-                .toList();
-            if (kDebugMode) {
-              print("filteredActivity :" + filteredActivity.length.toString());
-            }
-
-            return filteredActivity.length == allActivity.length
-                ? Container()
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: filteredActivity.length,
-                    itemBuilder: (context, index) {
-                      ActivityModel activityModel = filteredActivity[index]!;
-                      return GestureDetector(
-                        onTap: () {
-                          Get.toNamed(
-                              RouteHelper.getActivityDetail(activityModel.id!));
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(
-                              left: Dimensions.widhth20,
-                              right: Dimensions.widhth20,
-                              bottom: Dimensions.height10),
-                          child: Row(
-                            children: [
-                              Container(
-                                  width: Dimensions.listViewImgSize,
-                                  height: Dimensions.listViewImgSize,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        Dimensions.radius20,
-                                      ),
-                                      color: Colors.white38,
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              AppConstants.IMG_PATH +
-                                                  activityModel.poster!)))),
-                              //focus the widget to get all available space
-                              Expanded(
-                                child: Container(
-                                  height: Dimensions.listViewTextContSize,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(
-                                            Dimensions.radius20),
-                                        bottomRight: Radius.circular(
-                                            Dimensions.radius20)),
-                                    color: Colors.white,
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      top: Dimensions.height1,
-                                      left: Dimensions.widhth10,
-                                      right: Dimensions.widhth10,
-                                      bottom: Dimensions.height1,
+        SizedBox(
+          height: 590,
+          child:
+              GetBuilder<SeacrhActivityController>(builder: (searchActivity) {
+            if (searchActivity.isLoaded) {
+              List allActivity = searchActivity.ActivityList;
+              if (kDebugMode) {
+                print("search term:" + _searchTerm);
+              }
+              List filteredActivity = allActivity
+                  .where((allActivity) => allActivity.titleEn
+                      .toLowerCase()
+                      .contains(_searchTerm.toLowerCase()))
+                  .toList();
+              if (kDebugMode) {
+                print(
+                    "filteredActivity :" + filteredActivity.length.toString());
+              }
+              return ListView.builder(
+                  shrinkWrap: true,
+                  // physics: NeverScrollableScrollPhysics(),
+                  itemCount: filteredActivity.length,
+                  itemBuilder: (context, index) {
+                    ActivityModel activityModel = filteredActivity[index]!;
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed(
+                            RouteHelper.getActivityDetail(activityModel.id!));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: Dimensions.widhth20,
+                            right: Dimensions.widhth20,
+                            bottom: Dimensions.height10),
+                        child: Row(
+                          children: [
+                            Container(
+                                width: Dimensions.listViewImgSize,
+                                height: Dimensions.listViewImgSize,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      Dimensions.radius20,
                                     ),
-                                    child: AppColumnSmall(
-                                        text: activityModel.titleEn!,
-                                        stars: activityModel.stars!,
-                                        comments_num: activityModel.comments!,
-                                        date: activityModel.dates![0].date!,
-                                        day: activityModel.dates![0].day!,
-                                        time:
-                                            activityModel.dates![0].startTime!,
-                                        location: activityModel.location!),
+                                    color: Colors.white38,
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            AppConstants.IMG_PATH +
+                                                activityModel.poster!)))),
+                            //focus the widget to get all available space
+                            Expanded(
+                              child: Container(
+                                height: Dimensions.listViewTextContSize,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                      topRight:
+                                          Radius.circular(Dimensions.radius20),
+                                      bottomRight:
+                                          Radius.circular(Dimensions.radius20)),
+                                  color: Colors.white,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    top: Dimensions.height1,
+                                    left: Dimensions.widhth10,
+                                    right: Dimensions.widhth10,
+                                    bottom: Dimensions.height1,
                                   ),
+                                  child: AppColumnSmall(
+                                      text: activityModel.titleEn!,
+                                      stars: activityModel.stars!,
+                                      comments_num: activityModel.comments!,
+                                      date: activityModel.dates![0].date!,
+                                      day: activityModel.dates![0].day!,
+                                      time: activityModel.dates![0].startTime!,
+                                      location: activityModel.location!),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      );
-                    });
-          }
+                      ),
+                    );
+                  });
+            }
 
-          return Container();
+            return Container();
 
-          Container();
-        }),
+            Container();
+          }),
+        ),
       ],
     );
   }

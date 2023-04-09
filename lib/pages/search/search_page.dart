@@ -23,10 +23,11 @@ class SearchPage extends StatelessWidget {
             children: [
               //showing the header
               HeaderInfo(title: 'Search'),
-              const Expanded(
-                  child: SingleChildScrollView(
-                child: SearchPageBody(),
-              )),
+              const SearchPageBody(),
+              // const Expanded(
+              //     child: SingleChildScrollView(
+              //   child: SearchPageBody(),
+              // )),
             ],
           ),
         ),
