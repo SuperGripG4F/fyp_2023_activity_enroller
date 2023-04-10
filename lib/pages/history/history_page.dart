@@ -55,19 +55,23 @@ class _HistoryPage extends State<HistoryPage> {
         Expanded(child: GetBuilder<JoinedActivityController>(
           builder: (joinedActivity) {
             return joinedActivity.isLoaded
-                ? ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: joinedActivity.joinedActivityList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      ActivityModel activityModel =
-                          joinedActivity.joinedActivityList[index]!;
-                      return GestureDetector(
-                          onTap: () {
-                            Get.toNamed(RouteHelper.getHistoryActivity(index));
-                          },
-                          child: SmallAppColumn(activityModel: activityModel));
-                    },
-                  )
+                ? joinedActivity.joinedActivityList.isEmpty
+                    ? SmallText(text: "No activitiy history")
+                    : ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: joinedActivity.joinedActivityList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          ActivityModel activityModel =
+                              joinedActivity.joinedActivityList[index]!;
+                          return GestureDetector(
+                              onTap: () {
+                                Get.toNamed(
+                                    RouteHelper.getHistoryActivity(index));
+                              },
+                              child:
+                                  SmallAppColumn(activityModel: activityModel));
+                        },
+                      )
                 : CircularProgress();
           },
         )),

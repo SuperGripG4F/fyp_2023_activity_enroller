@@ -58,18 +58,21 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
             Expanded(child: GetBuilder<ActivityAnnouncementController>(
                 builder: (activityAnnouncement) {
               return activityAnnouncement.isLoaded
-                  ? ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      // physics: const NeverScrollableScrollPhysics(),
-                      itemCount: activityAnnouncement.announcementList.length,
-                      itemBuilder: (context, index) {
-                        AnnouncementModel announcementModel =
-                            activityAnnouncement.announcementList[index]!;
-
-                        return Announcement_card_widget(
-                            announcementModel: announcementModel, index: index);
-                      })
+                  ? activityAnnouncement.announcementList.isEmpty
+                      ? SmallText(text: "No announcement")
+                      : ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          // physics: const NeverScrollableScrollPhysics(),
+                          itemCount:
+                              activityAnnouncement.announcementList.length,
+                          itemBuilder: (context, index) {
+                            AnnouncementModel announcementModel =
+                                activityAnnouncement.announcementList[index]!;
+                            return Announcement_card_widget(
+                                announcementModel: announcementModel,
+                                index: index);
+                          })
                   : CircularProgress();
             }))
           ],

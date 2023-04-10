@@ -13,6 +13,7 @@ import 'package:quickalert/quickalert.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import '../../data/model/user_model.dart';
+import '../../routes/bottomNav_helper.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/display_image_widget.dart';
@@ -69,6 +70,10 @@ class _UserPageState extends State<UserPage> {
                       cancelBtnText: 'No',
                       confirmBtnColor: AppColors.mainColor5,
                       onConfirmBtnTap: () async {
+                        final BottomNavHelper bottomNavHelper =
+                            Get.find<BottomNavHelper>();
+                        bottomNavHelper.pageValue = 0;
+
                         Navigator.of(context, rootNavigator: true).pop();
                         AppConstants.removeToken();
                         Get.offNamed(RouteHelper.getLogin());

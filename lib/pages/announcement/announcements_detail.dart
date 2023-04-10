@@ -57,7 +57,7 @@ class AnnouncementsDetailPage extends StatelessWidget {
                       )),
                       child: BigTextSoftWrap(
                         text: announcementModel.title!,
-                        size: 30,
+                        size: 24,
                       ),
                     ),
                     const SizedBox(
@@ -65,7 +65,7 @@ class AnnouncementsDetailPage extends StatelessWidget {
                     ),
                     Container(
                       width: 350,
-                      padding: EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(bottom: 10),
                       decoration: const BoxDecoration(
                           border: Border(
                         bottom: BorderSide(
