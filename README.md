@@ -27,7 +27,7 @@ The “Activity helper” application has successfully achieved its stated aims 
 
 ## Used technical Skills
 
-1. Back-end server – Ubuntu, Docker
+1. Back-end server – Ubuntu, Docker, MySQL
 2. Web application Python Django, Flutter
 3. Mobile application – Flutter
 4. Recommendation system – Python
